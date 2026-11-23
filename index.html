@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'unsafe-inline'; font-src data:; img-src 'self' blob: data:; media-src blob:; connect-src 'self' https://api.anthropic.com https://huggingface.co https://*.huggingface.co https://*.hf.co; manifest-src 'self'; worker-src 'self' blob:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'unsafe-inline'; font-src data:; img-src 'self' blob: data:; media-src blob:; connect-src 'self' https://api.anthropic.com https://ibis-salamin.franklin-garvida.workers.dev https://huggingface.co https://*.huggingface.co https://*.hf.co; manifest-src 'self'; worker-src 'self' blob:; base-uri 'none'; form-action 'none'">
 <meta name="salamin-lib" content="1">
+<meta name="salamin-relay" content="https://ibis-salamin.franklin-garvida.workers.dev">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Salamin</title>
 <meta name="theme-color" content="#1D5243">
@@ -386,6 +387,7 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
             <h2>3. Get feedback</h2>
             <label class="f" for="lang">Feedback language<select id="lang"><option value="English">English</option><option value="Taglish">Taglish (Filipino and English mix)</option><option value="Filipino">Filipino (Tagalog)</option></select></label>
             <div id="aibox" hidden>
+              <p class="small muted" id="school-hint" hidden style="margin:0 0 8px">Did your school give you a Salamin link? Open it once on this device to get feedback in one tap.</p>
               <label class="f" for="aimode" id="aimode-wrap">How to get the feedback<select id="aimode"></select></label>
               <div id="api-fields" hidden>
                 <label class="f" for="apikey">Your Anthropic API key<input id="apikey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-..."></label>
@@ -397,6 +399,7 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
             <p class="small muted" id="sendsum" style="margin:10px 0"></p>
             <details style="margin:0 0 12px"><summary>See exactly what text is sent</summary><textarea id="sentpreview" class="ro" rows="8" readonly aria-label="Text that will be sent" style="margin-top:8px"></textarea></details>
             <div class="banner" id="trok-wrap" hidden style="margin-bottom:8px"><span id="tr-note"></span> <button class="tlink" type="button" data-review>Review it</button></div>
+            <p class="small" id="school-ack" hidden style="margin:0 0 4px"></p>
             <label class="consent" style="display:block"><span style="display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg)"><input type="checkbox" id="ack" style="width:22px;height:22px;margin-top:2px;accent-color:var(--accent);flex:none"><span id="ack-text">I looked at every image. No learner can be recognized in them, including faces close to the camera.</span></span></label>
             <div class="row" style="margin-top:12px"><button class="btn" id="send" type="button" disabled>Get feedback from Claude (2 checks)</button><button class="btn danger sm" id="stop" type="button" hidden>Stop</button><button class="btn ghost sm" id="skip" type="button">Skip AI and just reflect</button></div>
             <div class="status" id="send-status" role="status" aria-live="polite"></div>
@@ -753,6 +756,10 @@ var LEVEL_PX={strict:256,balanced:480};
 
 function fresh(){return {round:1,date:today(),plan:'',transcript:'',names:'',crit:'',lang:'English',level:'strict',mode:'quick',consentAt:'',consent:CONSENT.map(function(){return false}),ratings:{},answers:['','',''],goalNext:'',goalMet:'',marks:{},focus:'',moments:[],useMoments:false,subject:'',grade:'',prepBy:'',school:'',seen3:false,trRev:null,trOrig:'',mentor:{role:'',notes:'',next:''},pilot:'',ai:null,prev:null}}
 var standalone=!(window.claude&&window.claude.use), aiMode='', lastReply='';
+/* School access: the hosted site carries the address of the school's relay, which keeps the API key.
+   A teacher opens the school's Salamin link (with #code=...) once; the code stays on this device. */
+var RELAY=(function(){var m=document.querySelector('meta[name="salamin-relay"]'),u=m?String(m.content||'').replace(/\/+$/,''):'';return (/^https?:$/.test(location.protocol)&&/^https:\/\/[A-Za-z0-9.-]+(\/[A-Za-z0-9._~\/-]*)?$/.test(u))?u:''})();
+var schoolCode='';
 var vfile=null, state=fresh(), vurl=null, vname='', dur=0, masks=[], frames=[], previewSig='', busy=false, ctl=null, vbad=false, vnopic=false, aiSig='', undoAI=null;
 var sample=null, caps=null, dl=null, autosave=false, step=1, saveTm=null, aiChecked=false;
 
@@ -1231,6 +1238,12 @@ $('#imp-go').addEventListener('click',function(){importRound($('#imp-text').valu
 
 /* ---------- step 2: video, blur boxes, preview, send ---------- */
 var vid=$('#vid'), ov=$('#ov');
+/* With school access, a chosen video goes straight to its blurred images and the Get feedback button. */
+var fastShow=false;
+function fastGo(){
+  if(!(standalone&&aiMode==='school'&&step===1&&state.mode==='quick'&&!vbad&&!vnopic&&dur>0))return;
+  setTimeout(function(){if(step===1&&vurl&&!vbad&&!vnopic&&aiMode==='school'){fastShow=true;go(2)}},350);
+}
 function ensureDuration(el){
   /* Some recordings (for example WebM from a browser or webcam) report an unknown length until the end is reached. */
   return new Promise(function(res){
@@ -1247,11 +1260,12 @@ vid.addEventListener('loadedmetadata',function(){
   if(vid.videoWidth&&vid.videoHeight)$('#vwrap').style.setProperty('--ar',(vid.videoWidth/vid.videoHeight).toFixed(4));
   vnopic=!(vid.videoWidth&&vid.videoHeight);syncLevel();updateSend();
   var d=vid.duration,so=vnopic?'. No picture: this may be a sound-only file, or a video format this browser cannot show, such as iPhone HEVC. Feedback can still use the transcript.':'';
-  if(isFinite(d)&&d>0){dur=d;$('#pdur').textContent=fmt(dur)+' long'+so;return}
+  if(isFinite(d)&&d>0){dur=d;$('#pdur').textContent=fmt(dur)+' long'+so;fastGo();return}
   dur=0;$('#pdur').textContent='Reading the length of this video\u2026';
   ensureDuration(vid).then(function(d2){
     dur=d2;$('#pdur').textContent=d2>0?fmt(d2)+' long'+so:'Could not read the length of this video. Try another file.';
     if(step===2&&!textOnly()&&!frames.length&&!busy&&canPreview())makePreview();
+    fastGo();
   });
 });
 vid.addEventListener('error',function(){if(!vurl)return;vbad=true;dur=0;updateTo2();syncLevel();updateSend();$('#pdur').textContent='This browser cannot play this video. iPhone videos in HEVC (High Efficiency) format do not play in some browsers. Try Safari, Chrome or Edge, or convert the file to MP4 (H.264) with a free app such as HandBrake or VLC. For future recordings, set the iPhone camera format to Most Compatible. Old formats such as AVI, WMV or FLV usually cannot play either. You can still make or add a transcript and get feedback on the text only.';toast('This browser cannot play that video file.')});
@@ -1297,6 +1311,7 @@ function syncLevel(){
   $('#pv-h').textContent=t?'2. Images':'2. Preview the images that can be sent';
   $('#pv-p').textContent=t?'Text only: no images are made or sent.':'These exact images are the only pictures that can be sent.';
   $('#pv-row').hidden=t;$('#thumbs').hidden=t;$('#pv-status').hidden=t;
+  setTimeout(syncSchoolAck,0);
   $('#ack-text').textContent=t?'I read the text that will be sent. Learners\u2019 names are replaced, and nothing else in it identifies a learner.':'I looked at every image. No learner can be recognized in them, including faces close to the camera.';
   var dt=$('#sentpreview').closest('details');if(dt&&t)dt.open=true;
 }
@@ -1370,6 +1385,7 @@ async function makePreview(){
     previewSig=curSig();
     $('#thumbs').innerHTML=frames.map(function(f,i){return '<figure><img src="'+f.url+'" alt="Preview image '+(i+1)+' at '+fmt(f.t)+'"><figcaption><b>'+(i+1)+'</b> '+fmt(f.t)+'</figcaption></figure>'}).join('');
     st.textContent=frames.length+(frames.length===1?' image':' images')+' ready. Look at each one.'+(g.skipped?' '+g.skipped+' could not be read and were skipped.':'');
+    if(fastShow){fastShow=false;if(step===2&&aiMode==='school')$('#thumbs').closest('.card').scrollIntoView({block:'start'})}
   }catch(err){
     clearFrames();
     st.textContent=why==='black'?'The preview images came out black, so this browser could not read the picture of this video. This often happens with iPhone videos in HEVC (High Efficiency) format. Try another browser, or convert the video to MP4 (H.264). You can still get feedback from your transcript: choose No images (text only) above.':why==='nopicture'?'This file has no picture this browser can show. It may be sound only. Feedback can still use your transcript: images are now set to text only.':'Could not make the preview on this device. You can still get feedback from your transcript: choose No images (text only) above.';
@@ -1441,25 +1457,30 @@ $('#letter-save').addEventListener('click',function(){saveFile('salamin-consent-
 var MODE_HELP={
   claude:'Claude reads only what is listed below, through your Claude account. It asks your permission the first time. Your Claude privacy settings apply. To keep this out of model training, turn off model improvement in Claude under Settings, Privacy.',
   api:'Your browser sends only what is listed below straight to Anthropic with your key. Salamin has no server. API data falls under Anthropic\'s commercial terms and is not used for model training by default. Check your school\'s rules first.',
+  school:'Your school\'s Salamin account sends only what is listed below to Claude (Anthropic) and brings back the feedback. Nothing is stored on the way. API data is not used to train models by default.',
   manual:'Salamin cannot reach Claude from here, so you do it by hand: paste the prompt in Claude chat (and attach the blurred images, if you send images), then paste the reply back. You do this twice, in two separate chats. Use incognito chats if you can: they are not saved to your chat history or used for training.'};
 function aiReady(){
   if(aiMode==='claude')return !!(sample&&caps&&caps.images);
   if(aiMode==='api')return /^sk-ant-/.test($('#apikey').value.trim())&&$('#apimodel').value.trim().length>3;
+  if(aiMode==='school')return !!(RELAY&&schoolCode);
   return aiMode==='manual';
 }
 function setupModes(){
   var sel=$('#aimode'),opts=[];
   if(sample&&caps&&caps.images)opts.push(['claude','Claude in this page (uses your Claude account)']);
-  if(standalone){opts.push(['manual','Copy and paste with Claude chat (no key needed)']);opts.push(['api','My own Anthropic API key'])}
+  if(standalone){if(RELAY&&schoolCode)opts.push(['school','School access (no account needed)']);opts.push(['manual','Copy and paste with Claude chat (no key needed)']);opts.push(['api','My own Anthropic API key'])}
   sel.innerHTML=opts.map(function(o){return '<option value="'+o[0]+'">'+o[1]+'</option>'}).join('');
   $('#aibox').hidden=!opts.length;$('#aimode-wrap').hidden=opts.length<2;
   aiMode=opts.length?opts[0][0]:'';
+  $('#school-hint').hidden=!(standalone&&RELAY&&!schoolCode);
   applyMode();
 }
+function syncSchoolAck(){$('#school-ack').textContent='Tapping Get feedback means: '+$('#ack-text').textContent}
 function applyMode(){
   $('#api-fields').hidden=aiMode!=='api';
   $('#aimode-help').textContent=MODE_HELP[aiMode]||'';
-  $('#send').textContent=aiMode==='manual'?'Start the 2 checks with Claude chat':'Get feedback from Claude (2 checks)';
+  $('#send').textContent=aiMode==='school'?'Get feedback':aiMode==='manual'?'Start the 2 checks with Claude chat':'Get feedback from Claude (2 checks)';
+  $('#ack').closest('label').hidden=aiMode==='school';$('#school-ack').hidden=aiMode!=='school';syncSchoolAck();
   updateSend();
 }
 $('#aimode').addEventListener('change',function(e){aiMode=e.target.value;applyMode()});
@@ -1513,7 +1534,7 @@ function updateSend(){
     if(p.info)all.push('LESSON\n'+p.info);if(p.focus)all.push('FOCUS\n'+p.focus);if(p.plan)all.push('LESSON PLAN\n'+p.plan);if(p.transcript)all.push('TRANSCRIPT\n'+p.transcript);if(p.crit)all.push('SCHOOL CRITERIA\n'+p.crit);
     $('#sentpreview').value=all.length?all.join('\n\n'):(tOnly?'No text yet.':'No text will be sent. Only the images above.');
   }
-  $('#send').disabled=!(aiReady()&&isFresh()&&$('#ack').checked&&!busy&&!ctl);
+  $('#send').disabled=!(aiReady()&&isFresh()&&(aiMode==='school'||$('#ack').checked)&&!busy&&!ctl);
   $('#mkPreview').disabled=busy||!!ctl;
   $('#skip').textContent=state.ai?'Go to your feedback':'Skip AI and just reflect';
 }
@@ -1744,6 +1765,10 @@ function merge(A,B){
 function aiError(e){
   var c=e&&e.code;
   if(c==='cancelled')return 'Stopped. Nothing more was sent.';
+  if(c==='school_code')return 'This device\'s Salamin access was not accepted. Ask your coordinator for the current Salamin link and open it once.';
+  if(c==='school_setup')return 'Salamin\'s AI service is not set up correctly yet. Tell your coordinator. You can still reflect without AI.';
+  if(c==='school_network')return 'Could not reach Salamin\'s AI service. Check your internet connection and try again.';
+  if(c==='no_credit')return e.school?'Salamin\'s AI credit has run out. Tell your coordinator. You can still reflect without AI.':'Your API credit has run out. Add credit in the Claude Console, or switch to copy and paste.';
   if(c==='not_granted')return 'You did not allow Claude, so nothing was sent. You can still reflect without AI.';
   if(c==='rate_limited')return 'Too many requests or your Claude usage limit was reached. Try again later.';
   if(c==='invalid_json'||c==='empty_completion')return 'Claude\'s reply could not be used. Tap the button to try again.';
@@ -1767,21 +1792,24 @@ function parseLoose(t){
   if(a>=0&&b>a){try{var o=JSON.parse(t.slice(a,b+1));if(o&&typeof o==='object'&&!Array.isArray(o))return o}catch(e){}}
   throw {code:'invalid_json'};
 }
-async function callAPI(prompt,blobs,times,signal){
+async function callAPI(prompt,blobs,times,signal,school){
   var content=[];
   for(var i=0;i<blobs.length;i++){content.push({type:'text',text:'Image '+(i+1)+' at '+fmt(times[i])+':'});content.push({type:'image',source:{type:'base64',media_type:'image/jpeg',data:await blobB64(blobs[i])}})}
   content.push({type:'text',text:prompt});
   var res;
   try{
-    res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',signal:signal,
-      headers:{'content-type':'application/json','x-api-key':$('#apikey').value.trim(),'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:$('#apimodel').value.trim(),max_tokens:8000,messages:[{role:'user',content:content}]})});
-  }catch(e){if(e&&e.name==='AbortError')throw {code:'cancelled'};throw {code:'network'}}
+    res=await fetch(school?RELAY:'https://api.anthropic.com/v1/messages',{method:'POST',signal:signal,
+      headers:school?{'content-type':'application/json','x-salamin-code':schoolCode}:{'content-type':'application/json','x-api-key':$('#apikey').value.trim(),'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:school?'claude-sonnet-5-5':$('#apimodel').value.trim(),max_tokens:8000,messages:[{role:'user',content:content}]})});
+  }catch(e){if(e&&e.name==='AbortError')throw {code:'cancelled'};throw {code:school?'school_network':'network'}}
+  if(school&&(res.status===401||res.status===403))throw {code:'school_code'};
+  if(school&&res.status===502){var rk={};try{rk=await res.json()}catch(e){}throw {code:(rk&&rk.error&&rk.error.type)==='relay_key'?'school_setup':'school_network'}}
   if(res.status===401||res.status===403)throw {code:'bad_key'};
   if(res.status===429)throw {code:'rate_limited'};
   if(!res.ok){
     var info={};try{info=await res.json()}catch(e){}
     var er=(info&&info.error&&typeof info.error==='object')?info.error:{},et=String(er.type||''),em=str(String(er.message||''),180).replace(/[.\s]+$/,'');
+    if(/credit balance/i.test(String(er.message||'')))throw {code:'no_credit',school:!!school};
     if(res.status===404||et==='not_found_error')throw {code:'bad_model'};
     if(res.status===413||et==='request_too_large')throw {code:'too_long'};
     if(res.status===529||et==='overloaded_error')throw {code:'overloaded'};
@@ -1837,10 +1865,11 @@ function manualRound(r,signal){
 async function callAI(r,blobs,times){
   if(aiMode==='claude'){var o={modelTier:'default',cache:false,signal:ctl.signal};if(blobs.length)o.images=blobs;return sample.json(buildPrompt(),o)}
   if(aiMode==='api')return callAPI(buildPrompt(),blobs,times,ctl.signal);
+  if(aiMode==='school')return callAPI(buildPrompt(),blobs,times,ctl.signal,true);
   return manualRound(r,ctl.signal);
 }
 $('#send').addEventListener('click',async function(){
-  if(!aiReady()||!isFresh()||!$('#ack').checked||ctl)return;
+  if(!aiReady()||!isFresh()||!(aiMode==='school'||$('#ack').checked)||ctl)return;
   lastReply='';
   var tOnly=textOnly(),N=tOnly?0:frames.length,times=tOnly?[]:frames.map(function(f){return f.t}),blobs=tOnly?[]:frames.map(function(f){return f.blob});
   ctl=new AbortController();
@@ -1850,14 +1879,14 @@ $('#send').addEventListener('click',async function(){
     var runs=[];
     if(aiMode==='claude'&&caps&&caps.maxPromptBytes&&new TextEncoder().encode(buildPrompt()).length>caps.maxPromptBytes*0.9)throw {code:'too_long'};
     for(var r=1;r<=2;r++){
-      s.textContent=aiMode==='manual'?'Check '+r+' of 2. Follow the steps in the window.':aiMode==='api'?'Check '+r+' of 2. Sending to Anthropic with your key. This can take up to a minute.':'Check '+r+' of 2. Claude is reading your '+(tOnly?'text':'frames and text')+'. Each check can take up to a minute. Claude asks your permission the first time.';
+      s.textContent=aiMode==='manual'?'Check '+r+' of 2. Follow the steps in the window.':aiMode==='school'?'Check '+r+' of 2. Claude is reading your '+(tOnly?'text':'images and text')+'. Each check can take up to a minute.':aiMode==='api'?'Check '+r+' of 2. Sending to Anthropic with your key. This can take up to a minute.':'Check '+r+' of 2. Claude is reading your '+(tOnly?'text':'frames and text')+'. Each check can take up to a minute. Claude asks your permission the first time.';
       var data=await callAI(r,blobs,times);
       var one=cleanAI(data,N,times);
       if(!one.frames.length&&!one.plan.length&&!one.strengths.length&&!one.tries.length&&!one.language&&!one.extra.length&&!one.criteria.some(function(c){return c.status!=='not-enough'}))throw {code:'invalid_json'};
       runs.push(one);
     }
     var cleaned=merge(runs[0],runs[1]);
-    state.ai=cleaned;state.ai.madeIn=state.mode;state.ai.via=aiMode;state.ai.model=aiMode==='api'?$('#apimodel').value.trim().slice(0,60):'';state.ai.discarded=0;state.ai.textOnly=tOnly;
+    state.ai=cleaned;state.ai.madeIn=state.mode;state.ai.via=aiMode;state.ai.model=aiMode==='api'?$('#apimodel').value.trim().slice(0,60):aiMode==='school'?'claude-sonnet-5-5':'';state.ai.discarded=0;state.ai.textOnly=tOnly;
     aiSig=tOnly?'text':previewSig;undoAI=null;$('#ai-cleared').hidden=true;
     if(!state.goalNext&&state.ai.goal)state.goalNext=state.ai.goal;
     touch();s.textContent='';go(3);
@@ -1991,7 +2020,7 @@ function metaLine(){
   return (bits.length?bits.join(', ')+'. ':'')+'Round '+state.round+', '+state.date+'.'+(a&&a.topic&&a.topic!=='Not stated'?' Topic: '+a.topic+'.':'');
 }
 function aiUse(a){
-  var via=a.via==='api'?' through the Anthropic API'+(a.model?' (model '+a.model+')':''):a.via==='manual'?' in Claude chat, by copy and paste':a.via==='claude'?' through the teacher\'s Claude account':'';
+  var via=a.via==='api'?' through the Anthropic API'+(a.model?' (model '+a.model+')':''):a.via==='manual'?' in Claude chat, by copy and paste':a.via==='claude'?' through the teacher\'s Claude account':a.via==='school'?' through the school\'s Salamin account (Anthropic API'+(a.model?', model '+a.model:'')+')':'';
   var g=a.check.gate,inp=[a.n?a.n+' blurred, low-resolution still image'+(a.n===1?'':'s'):'no images (text only)'];
   if(g.plan)inp.push('the lesson plan');if(g.transcript)inp.push(g.machine?'a transcript made on this device by speech recognition ('+(g.trModel||'Whisper')+'), '+(g.reviewNote||'not reviewed')+(g.trChanged!=null?', about '+g.trChanged+'% of its words corrected by the teacher':''):'a transcript of the class talk supplied by the teacher');if(a.extra.length)inp.push('the school\'s criteria');
   var m=marksCount(),k=a.criteria.filter(function(c){return c.status!=='not-enough'}).length;
@@ -2174,7 +2203,7 @@ function vAI(a){
     strengths:(Array.isArray(a.strengths)?a.strengths:[]).slice(0,3).map(item).filter(function(x){return x.text}),
     tries:(Array.isArray(a.tries)?a.tries:[]).slice(0,3).map(item).filter(function(x){return x.text}),
     limits:(Array.isArray(a.limits)?a.limits:[]).map(function(x){return vStr(x,200)}).filter(Boolean).slice(0,5),
-    questions:q,goal:vStr(a.goal,140),textOnly:!N,madeIn:okv(a.madeIn,['quick','formal'],'quick'),via:okv(a.via,['claude','api','manual'],''),model:vStr(a.model,60),discarded:vInt(a.discarded,0,999),
+    questions:q,goal:vStr(a.goal,140),textOnly:!N,madeIn:okv(a.madeIn,['quick','formal'],'quick'),via:okv(a.via,['claude','api','manual','school'],''),model:vStr(a.model,60),discarded:vInt(a.discarded,0,999),
     check:{citesOk:vInt(c.citesOk,0,9999),citesBad:vInt(c.citesBad,0,9999),removed:vInt(c.removed,0,9999),dropped:vInt(c.dropped,0,9999),cons:{agree:vInt(cons.agree,0,99),near:vInt(cons.near,0,99),unstable:vInt(cons.unstable,0,99)},
       gate:{frames:vInt(g.frames,0,12),textOnly:!N,plan:!!g.plan,transcript:!!g.transcript,labeled:!!g.labeled,guessed:!!g.guessed,trChanged:(typeof g.trChanged==='number'&&isFinite(g.trChanged))?clamp(g.trChanged,0,100):null,timed:!!g.timed,machine:!!g.machine,reviewed:!!g.reviewed,names:vInt(g.names,0,999),hidden:vInt(g.hidden,0,99999),trModel:vStr(g.trModel,30),reviewNote:vStr(g.reviewNote,80),cover:(typeof g.cover==='number'&&isFinite(g.cover))?clamp(g.cover,0,1):null,notes:(Array.isArray(g.notes)?g.notes:[]).map(function(x){return vStr(x,240)}).filter(Boolean).slice(0,6)}}
   };
@@ -2201,6 +2230,11 @@ if(lsGet('salamin-autosave')==='1'){
   try{var d=JSON.parse(lsGet('salamin-draft-v2')||'null');if(d&&typeof d==='object'&&!Array.isArray(d)&&d.date){state=cleanDraft(d);toast('Draft restored. Type the names to hide again before you send anything.')}}catch(e){state=fresh()}
 }
 fillStep1();
+(function(){
+  if(!RELAY)return;
+  try{var m=/(?:^#|&)code=([A-Za-z0-9_-]{6,64})(?:&|$)/.exec(location.hash||'');if(m){lsSet('salamin-code',m[1]);history.replaceState(null,'',location.pathname+location.search);toast('This device is ready for Salamin feedback')}}catch(e){}
+  var c=lsGet('salamin-code')||'';schoolCode=/^[A-Za-z0-9_-]{6,64}$/.test(c)?c:'';
+})();
 (function(){
   try{
     if(window.claude&&window.claude.use){

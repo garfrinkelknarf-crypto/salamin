@@ -3,22 +3,54 @@ SALAMIN - paano gamitin at i-host
 1) Pinakamadali (laptop): buksan ang Salamin.html (double-click) sa Chrome, Edge o Safari.
    Walang install, walang account. Gumagana ito offline. Ang video ay hindi na-uupload kahit saan.
 
-2) Website at app sa phone, gaya ng LIRJ site (GitHub Pages, libre):
-   a. Mag-sign in sa GitHub gamit ang account ng LIRJ site. New repository > pangalan: salamin > Public > Create repository.
-   b. I-unzip ang salamin-site.zip. Sa bagong repo: "uploading an existing file" (o Add file > Upload files).
-      I-drag ang LAHAT ng LAMAN ng salamin-site folder, hindi ang folder mismo: index.html, sw.js,
-      manifest.webmanifest, icon-192.png, icon-512.png, .nojekyll, at ang lib at models folders. Commit changes.
-      Lahat ng file ay mas maliit sa 25 MB, ang limit ng upload sa browser. (Ang .nojekyll ay nakatago sa Mac; ok lang kung maiwan.)
-   c. Settings > Pages > Build and deployment > Source: Deploy from a branch > Branch: main, folder: / (root) > Save.
-   d. Pagkalipas ng 1 hanggang 5 minuto, bukas na ito sa https://USERNAME.github.io/salamin/ (USERNAME = GitHub username mo).
-   e. Optional na sariling address, hal. salamin.layagilayaresearchjournal.org: Settings > Pages > Custom domain,
-      tapos sa domain provider, magdagdag ng CNAME record: salamin -> USERNAME.github.io. Pagkatapos, i-check ang Enforce HTTPS.
-   f. Sa phone, buksan ang link, tapos:
-      - Android (Chrome): menu > Install app / Add to Home screen
-      - iPhone (Safari): Share > Add to Home Screen
-      Pagkatapos ng unang bukas, gumagana na ito kahit offline. Sa pangalawang bukas, mas mabilis ang transcript sa laptop
-      dahil nagagamit na nito ang ilang CPU cores.
-   Iba pang host (hal. server ng school): i-upload lang ang parehong mga file sa isang https address.
+2) Website at app sa phone, gaya ng LIRJ site (GitHub Pages, libre). Gumamit ng laptop, Chrome o Edge.
+
+   A. GUMAWA NG REPOSITORY
+      1. Pumunta sa github.com at mag-sign in.
+      2. Sa kanang itaas, i-click ang "+" (katabi ng profile picture), tapos "New repository".
+      3. Repository name: salamin (maliit na letra, walang space).
+      4. Piliin ang Public. Kailangan ito para libre ang GitHub Pages.
+      5. Huwag i-check ang "Add a README" o anumang nasa ibaba nito.
+      6. I-click ang berdeng "Create repository".
+      Tsek: may lalabas na "Quick setup" at link na "uploading an existing file".
+
+   B. I-UNZIP
+      1. Windows: right-click ang salamin-site.zip > Extract All... > Extract. Mac: i-double-click.
+      2. Buksan ang folder na salamin-site.
+      Tsek: nasa loob agad ang index.html, sw.js, manifest.webmanifest, icon-192.png, icon-512.png,
+      HOW-TO-HOST.txt, at ang mga folder na lib at models.
+
+   C. I-UPLOAD
+      1. Sa page ng bagong repo, i-click ang "uploading an existing file".
+      2. Ilagay nang magkatabi ang browser at ang salamin-site folder.
+      3. Sa folder, pindutin ang Ctrl + A (Mac: Command + A) para ma-select lahat, kasama ang lib at models.
+      4. I-drag ang lahat papunta sa kahon na "Drag files here..." sa browser, tapos bitawan.
+         Huwag gamitin ang "choose your files": hindi nito kayang mag-upload ng folder.
+      5. Hintaying lumabas ang listahan ng files. Dapat kasama ang lib/transformers.min.js at lib/ort-wasm-simd-threaded.asyncify.wasm.gz.
+      6. Mag-scroll pababa. Iwan ang "Commit directly to the main branch". I-click ang "Commit changes".
+      Tsek: sa main page ng repo, nasa pinakaitaas ang index.html, hindi nasa loob ng isa pang folder.
+
+   D. I-ON ANG WEBSITE
+      1. Sa itaas ng repo, i-click ang Settings (kung wala, nasa menu na "...").
+      2. Sa kaliwa, i-click ang Pages.
+      3. Sa "Build and deployment" > Source, piliin ang "Deploy from a branch".
+      4. Sa Branch, palitan ang "None" ng "main". Iwan ang "/ (root)". I-click ang Save.
+      5. Maghintay ng 2 hanggang 5 minuto, tapos i-refresh ang page. Lalabas sa itaas ang
+         "Your site is live at https://USERNAME.github.io/salamin/" at ang button na "Visit site".
+      Tsek: bubukas ang Salamin kapag kinlik ang Visit site.
+
+   E. KUNG MAY PROBLEMA
+      - 404: maghintay pa ng ilang minuto. Kung ganoon pa rin, tingnan kung nasa pinakaitaas ng repo ang index.html.
+      - Nasa loob ng isang folder ang mga file sa repo: i-delete ang repo (Settings > General > Delete this repository)
+        at ulitin mula A, i-drag ang LAMAN ng folder, hindi ang folder.
+      - Walang Pages option o humihingi ng upgrade: gawing Public ang repo (Settings > General > Change visibility).
+
+   F. SA PHONE AT SA MGA GURO
+      - Android (Chrome): buksan ang link > menu na tatlong tuldok > Install app (o Add to Home screen).
+      - iPhone (Safari): buksan ang link > Share > Add to Home Screen.
+      - Pagkatapos ng unang bukas, gumagana na ito offline. I-share ang link sa pilot teachers.
+      - Optional na sariling address (hal. salamin.layagilayaresearchjournal.org): Settings > Pages > Custom domain,
+        tapos CNAME record sa domain provider: salamin -> USERNAME.github.io.
 
 3) AI feedback (opsyonal) - pumili sa Step 2:
    - Copy and paste with Claude chat: walang key. Ida-download mo ang blurred images, ia-attach sa Claude chat kasama ang prompt,
