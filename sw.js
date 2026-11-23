@@ -1,8 +1,8 @@
-var CACHE='salamin-v14';
+var CACHE='salamin-v16';
 /* The speech-engine files in lib/ are pinned versions, so they keep their own cache across app updates. Change LIB only when they change. */
 var LIB='salamin-lib-3';
 var FILES=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png'];
-self.addEventListener('install',function(e){e.waitUntil(caches.open(CACHE).then(function(c){return c.addAll(FILES)}).then(function(){return self.skipWaiting()}))});
+self.addEventListener('install',function(e){e.waitUntil(caches.open(CACHE).then(function(c){return c.addAll(FILES.map(function(f){return new Request(f,{cache:'reload'})}))}).then(function(){return self.skipWaiting()}))});
 self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf('salamin-')===0&&k!==CACHE&&k!==LIB}).map(function(k){return caches.delete(k)}))}).then(function(){return self.clients.claim()}))});
 /* The page is served cross-origin isolated so the speech engine can use several processor cores. */
 function iso(res){if(!res||res.type==='opaque'||res.type==='opaqueredirect')return res;var h=new Headers(res.headers);h.set('Cross-Origin-Opener-Policy','same-origin');h.set('Cross-Origin-Embedder-Policy','credentialless');return new Response(res.body,{status:res.status,statusText:res.statusText,headers:h})}

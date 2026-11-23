@@ -266,7 +266,7 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
           <h3 style="font-size:1rem;margin:4px 0">Make it here</h3>
           <p class="small muted">Salamin listens to your video and writes down what was said, with times. It runs on this phone or laptop, free, with no account, and the sound is not uploaded. The first time, it downloads a speech model (about 80 to 300 MB) and keeps it for next time. A laptop with Chrome or Edge is much faster than a phone. On a phone, you can do only part of the video, and you can stop at any time and keep what is done.</p>
           <div class="two wide" style="margin-top:10px">
-            <label class="f" for="tx-lang">Class talk is mostly<select id="tx-lang"><option value="tagalog">Filipino or Taglish</option><option value="english">English</option><option value="">Let Salamin detect it</option></select></label>
+            <label class="f" for="tx-lang">Class talk is mostly<select id="tx-lang"><option value="tagalog">Filipino or Taglish</option><option value="english">English</option></select></label>
             <label class="f" for="tx-model">Speed or accuracy<select id="tx-model"><option value="base">Faster, smaller download</option><option value="small">More accurate, slower</option></select></label>
           </div>
           <details class="sub"><summary>Only part of the video (faster on a phone)</summary>
@@ -281,7 +281,7 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
           <p class="status" id="tx-status" aria-live="polite"></p>
           <p class="small muted" style="margin-top:12px">Or add one you already have:</p>
         </div>
-        <p class="small muted" id="tx-unavail" hidden style="margin-bottom:10px">The downloaded Salamin app (Salamin.html or the installed app) can make the transcript for you. Here inside Claude, paste one or choose a file.</p>
+        <p class="small muted" id="tx-unavail" hidden style="margin-bottom:10px">The downloaded Salamin app (Salamin.html or the installed app) can make the transcript for you. Here, paste one or choose a file.</p>
         <textarea id="transcript" rows="6" placeholder="Paste the transcript here (timestamps help)" aria-label="Transcript text"></textarea>
         <div class="row" style="margin-top:8px">
           <label class="btn ghost sm" for="trfile" style="cursor:pointer">Choose file<input id="trfile" type="file" accept=".txt,.srt,.vtt,.md,.docx,text/plain" hidden></label>
@@ -301,14 +301,14 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
 
       <div class="card">
         <h2>What do you want feedback on?</h2>
-        <p class="muted small">Optional. One or two lines. Claude gives this extra attention inside the same criteria. Names are hidden like the other text.</p>
+        <p class="muted small">Optional. One or two lines. The AI gives this extra attention inside the same criteria. Names are hidden like the other text.</p>
         <textarea id="focus" rows="2" maxlength="300" placeholder="e.g. How I ask questions and how much my learners talk" aria-label="Focus for feedback"></textarea>
       </div>
 
       <div class="card">
         <details style="border-top:0;margin-top:0;padding-top:0">
           <summary>Add your school's own criteria (optional)</summary>
-          <p class="muted small" style="margin:8px 0">Paste the indicators you want feedback on, one per line, for example from your school's observation tool. Claude comments on each one. This is not an official rating.</p>
+          <p class="muted small" style="margin:8px 0">Paste the indicators you want feedback on, one per line, for example from your school's observation tool. The AI comments on each one. This is not an official rating.</p>
           <textarea id="crit" rows="5" maxlength="3000" placeholder="One criterion per line" aria-label="School criteria"></textarea>
         </details>
       </div>
@@ -373,7 +373,7 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
             <p class="muted small">Only a few still frames are made from your video. Pick how much detail they keep.</p>
             <label class="opt"><input type="radio" name="lvl" value="strict" checked><span><b>Strict (recommended)</b><br><span class="muted small">Very low detail. Shows layout and activity. A face close to the camera can still be recognized by people who know the learner, so cover it with a box.</span></span></label>
             <label class="opt"><input type="radio" name="lvl" value="balanced"><span><b>Balanced</b><br><span class="muted small">Sharper, so faces are easier to recognize. Scrub through the video and cover every face close to the camera.</span></span></label>
-            <label class="opt"><input type="radio" name="lvl" value="none"><span><b>No images (text only)</b><br><span class="muted small">Nothing from the video is sent. Claude reads only your transcript and lesson details, so it cannot judge what learners were doing, the room or safety. Needs a transcript. Works for sound-only recordings too.</span></span></label>
+            <label class="opt"><input type="radio" name="lvl" value="none"><span><b>No images (text only)</b><br><span class="muted small">Nothing from the video is sent. The AI reads only your transcript and lesson details, so it cannot judge what learners were doing, the room or safety. Needs a transcript. Works for sound-only recordings too.</span></span></label>
             <p class="small" id="lvl-forced" hidden style="margin-top:8px"></p>
           </div>
           <div class="card">
@@ -392,7 +392,7 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
               <div id="api-fields" hidden>
                 <label class="f" for="apikey">Your Anthropic API key<input id="apikey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-..."></label>
                 <label class="f" for="apimodel">Model<input id="apimodel" type="text" value="claude-sonnet-5-5" autocomplete="off" spellcheck="false"></label>
-                <p class="small muted">The key stays in this open tab only. It is never saved and is gone when you close or reload the page. Use it only on your own device. API use is billed to your API account, separate from a Claude subscription.</p>
+                <p class="small muted">The key stays in this open tab only. It is never saved and is gone when you close or reload the page. Use it only on your own device. API use is billed to your API account, separate from any AI chat subscription.</p>
               </div>
               <p class="small muted" id="aimode-help" style="margin:8px 0 0"></p>
             </div>
@@ -402,7 +402,7 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
             <div id="listen" hidden style="margin:0 0 10px"><p class="small" id="listen-st" style="margin:0 0 6px"></p><progress id="listen-bar" max="100" value="0" style="width:100%" aria-label="Listening progress"></progress><div class="row" style="margin-top:6px"><button class="btn ghost sm" id="listen-stop" type="button">Stop listening and use what was heard</button></div></div>
             <p class="small" id="school-ack" hidden style="margin:0 0 4px"></p>
             <label class="consent" style="display:block"><span style="display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg)"><input type="checkbox" id="ack" style="width:22px;height:22px;margin-top:2px;accent-color:var(--accent);flex:none"><span id="ack-text">I looked at every image. No learner can be recognized in them, including faces close to the camera.</span></span></label>
-            <div class="row" style="margin-top:12px"><button class="btn" id="send" type="button" disabled>Get feedback from Claude (2 checks)</button><button class="btn danger sm" id="stop" type="button" hidden>Stop</button><button class="btn ghost sm" id="skip" type="button">Skip AI and just reflect</button></div>
+            <div class="row" style="margin-top:12px"><button class="btn" id="send" type="button" disabled>Get feedback (2 checks)</button><button class="btn danger sm" id="stop" type="button" hidden>Stop</button><button class="btn ghost sm" id="skip" type="button">Skip AI and just reflect</button></div>
             <div class="status" id="send-status" role="status" aria-live="polite"></div>
           </div>
         </div>
@@ -506,8 +506,9 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
     <h4>Leaves this device only when you tap "Get feedback"</h4>
     <ul>
       <li>The few low-resolution preview images you checked, plus the lesson plan, transcript and criteria text you see in the "See exactly what text is sent" box. Names you listed are replaced with [name] first.</li>
-      <li>Inside Claude, they go to Claude on your own Claude account to write the feedback. Claude asks your permission first and it uses a little of your usage. Your Claude privacy settings apply.</li>
-      <li>In a downloaded copy you choose. Either you upload the blurred images and paste the prompt into Claude chat yourself, or your browser sends them straight to Anthropic with your own API key. Salamin has no server in between. Check Anthropic's current data terms for the API and your school's data rules.</li>
+      <li>With your school's Salamin link, they go through the school's Salamin account to the AI tool, an outside AI service run by Anthropic, which writes the feedback. Nothing is stored on the way, and this data is not used to train AI models by default.</li>
+      <li>In the version that runs inside an AI chat app, they go to the AI on your own account there. It asks your permission first and uses a little of your usage. Your privacy settings there apply.</li>
+      <li>In a downloaded copy you choose. Either you upload the blurred images and paste the prompt into your AI chat yourself, or your browser sends them straight to the AI service (Anthropic) with your own API key. Salamin has no server in between. Check Anthropic's current data terms for the API and your school's data rules.</li>
       <li>An API key you type is kept in the open tab only and is never saved.</li>
       <li>Nothing is sent if you tap "Skip AI and just reflect".</li>
     </ul>
@@ -516,12 +517,12 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
       <li>Before anything is sent to AI you must preview the exact images and confirm no learner can be recognized. This is the same in both modes.</li>
       <li>Quick feedback has no checklist and its reports are stamped as personal drafts. Formal report needs the consent checklist, and the report records it.</li>
       <li>Strict mode keeps very little detail, but a face close to the camera can still be recognized by someone who knows the learner. Boxes cover faces completely.</li>
-      <li>Claude is told not to identify anyone, not to read emotions, and not to describe anyone's appearance or personal traits.</li>
+      <li>The AI is told not to identify anyone, not to read emotions, and not to describe anyone's appearance or personal traits.</li>
       <li>The feedback is a draft. You can discard any line. Ratings are your own.</li>
       <li>For growth, not ranking. No school-wide totals, no leaderboards.</li>
     </ul>
     <h4>Follow your school's rules</h4>
-    <p class="small muted">Check these with your school head or Data Protection Officer: the Data Privacy Act of 2012 (RA 10173), DepEd's Child Protection Policy, and DepEd Order No. 003, s. 2026 on AI in basic education. That order asks schools to do a Privacy Impact Assessment before they deploy an AI system, to list it in the DepEd AI Registry, to disclose AI use, and to keep people in charge of decisions. It bans facial recognition and emotion recognition. Salamin does neither. This is not legal advice.</p>
+    <p class="small muted">Check these with your school head or Data Protection Officer: the Data Privacy Act of 2012 (RA 10173), DepEd's Child Protection Policy, and DepEd Order No. 003, s. 2026 on AI in basic education. That order asks schools to do a Privacy Impact Assessment before they deploy an AI system, to list it in the DepEd AI Registry, to disclose AI use, and to keep people in charge of decisions. It bans facial recognition. Salamin does no facial recognition and does not read emotions. This is not legal advice.</p>
     <h4>Draft on this browser</h4>
     <p class="small muted">Off by default. If you turn it on, your lesson details, plan text, ratings, notes, marked moments, the name and school for formal reports, and the AI feedback with transcript quotes removed (never the video, images, transcript or names list) are kept in this browser until you erase them. Do not turn it on if other people use this browser.</p>
     <label class="switch" for="autosave"><input type="checkbox" id="autosave"> Keep a draft on this browser</label>
@@ -538,22 +539,22 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
     <div id="crit-list"></div>
     <h4>What the software checks (not the AI)</h4>
     <ul>
-      <li>Every quote and time Claude cites must really exist in your transcript. Comments whose evidence cannot be found are removed, and one citation that cannot be found lowers Evidence found to Some evidence.</li>
-      <li>Talk, questioning, language, accuracy and checking are locked to Not enough evidence when there is no transcript. Talk also needs speaker labels. If most labels are Salamin's guesses that you did not confirm, talk shows at most Some evidence.</li>
+      <li>Every quote and time the AI cites must really exist in your transcript. Comments whose evidence cannot be found are removed, and one citation that cannot be found lowers Evidence found to Some evidence.</li>
+      <li>Talk, questioning, language, accuracy and checking are locked to Not enough evidence when there is no transcript. Without speaker labels, the AI works out who was speaking from the words, and talk shows at most Some evidence. The same applies when most labels are Salamin's guesses that you did not confirm.</li>
       <li>With No images (text only), what learners are doing and safety are locked to Not enough evidence, and lesson structure shows at most Some evidence.</li>
       <li>If Salamin made the transcript and you did not review it, transcript-based results show at most Some evidence.</li>
-      <li>Salamin asks Claude twice. If the two checks differ, the lower result is shown. If they are far apart it says Runs disagreed. Comments only one check made are removed.</li>
+      <li>Salamin asks the AI twice. If the two checks differ, the lower result is shown. If they are far apart it says Runs disagreed. Comments only one check made are removed.</li>
     </ul>
     <h4>What nobody has checked yet</h4>
     <ul>
       <li>These criteria are a draft. They are not validated and not an official observation tool.</li>
-      <li>How closely Claude agrees with trained human observers has not been measured. Your Agree and Disagree marks help, and the pilot table in step 3 lets a school measure it properly.</li>
+      <li>How closely the AI agrees with trained human observers has not been measured. Your Agree and Disagree marks help, and the pilot table in step 3 lets a school measure it properly.</li>
       <li>How well speech recognition handles Taglish has not been measured. When you review a transcript Salamin made, the report shows how many words you changed: a rough measure for your class.</li>
     </ul>
     <h4>What it cannot do</h4>
     <ul>
       <li>It sees at most 12 blurred frames, not the whole lesson, and hears no audio, tone or silence. With No images (text only), it sees nothing and reads only your text.</li>
-      <li>It cannot check that Claude read the images or the Filipino correctly. Only you can.</li>
+      <li>It cannot check that the AI read the images or the Filipino correctly. Only you can.</li>
       <li>It cannot judge safety, individual learners, or the quality of a teacher as a person.</li>
       <li>Mixing Filipino and English is treated as a learning resource, never as an error.</li>
     </ul>
@@ -563,16 +564,16 @@ progress{display:block;width:100%;height:10px;margin-top:12px;accent-color:var(-
 
 <div class="overlay" id="manual" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mn-title" tabindex="-1">
-    <h3 id="mn-title">Check 1 of 2 with Claude chat</h3>
+    <h3 id="mn-title">Check 1 of 2 in your AI chat</h3>
     <ol class="small">
-      <li>Open a <b id="mn-new">new chat</b> in Claude (claude.ai or the Claude app). An incognito chat (the ghost icon) is best: it is not saved to your chat history or used for training.</li>
+      <li>Open a <b id="mn-new">new chat</b> in your AI chat app. A private (incognito) chat is best: it is not saved to your chat history or used for training.</li>
       <li>Download the blurred images and attach all of them to the chat. Your browser may ask to allow several downloads.
         <div class="row" style="margin-top:6px"><button class="btn ghost sm" id="mn-dl" type="button">Download the images</button></div></li>
       <li>Copy this prompt and send it in the same message. Do not change it.
         <textarea class="ro" id="mn-prompt" readonly rows="5" aria-label="Prompt to copy"></textarea>
         <div class="row" style="margin-top:6px"><button class="btn ghost sm" id="mn-copy" type="button">Copy prompt</button></div></li>
-      <li>Copy Claude's whole reply and paste it here.
-        <textarea id="mn-reply" rows="5" placeholder="Paste Claude's reply here" aria-label="Claude's reply"></textarea></li>
+      <li>Copy the AI's whole reply and paste it here.
+        <textarea id="mn-reply" rows="5" placeholder="Paste the AI's reply here" aria-label="The AI's reply"></textarea></li>
     </ol>
     <div class="status" id="mn-status" role="status" aria-live="polite"></div>
     <div class="row" style="margin-top:12px"><button class="btn" id="mn-use" type="button">Use this reply</button><button class="btn ghost" id="mn-cancel" type="button">Cancel</button></div>
@@ -737,7 +738,7 @@ var LEVELS=['','Not yet seen','Emerging','Clear','Strong'];
 var CONSENT=[
   'My school head knows about this recording and about using AI feedback on it, and agrees.',
   'Parents or guardians were informed, and learners who may appear on camera or in a transcript have consent, including for AI feedback on blurred still frames and transcript text. Or the camera does not show learners\' faces.',
-  'I understand my video file never leaves this device. Only a few low-resolution, blurred still frames (no audio), plus the lesson plan and transcript text I add (with the names I list replaced by [name]), are sent to Claude, and I can preview all of it first.',
+  'I understand my video file never leaves this device. Only a few low-resolution, blurred still frames (no audio), plus the lesson plan and transcript text I add (with the names I list replaced by [name]), are sent to the AI tool, an outside AI service run by Anthropic, and I can preview all of it first.',
   'This is my own lesson, for my own reflection or for coaching with a peer or mentor I choose. It is not for ranking, grading, IPCRF, COT or any decision about a teacher. I will review the AI draft myself.',
   'I will delete the recording when this round ends.'];
 var DEFQ=['What went the way you planned?','What surprised you?','What will you try next time?'];
@@ -1342,7 +1343,7 @@ function clearFrames(){frames.forEach(function(f){URL.revokeObjectURL(f.url)});f
 function canPreview(){return !!vurl&&dur>0}
 function pickCount(){
   var max=(caps&&caps.images&&caps.images.maxCount)?caps.images.maxCount:(aiMode==='school'?12:8);
-  return Math.max(1,Math.min(12,max,clamp(Math.round(dur/180),6,12),Math.floor(dur/2)||1));
+  return Math.max(1,Math.min(12,max,clamp(Math.round(dur/(aiMode==='school'?90:180)),6,12),Math.floor(dur/2)||1));
 }
 function frameTimes(){
   var cap=Math.min(12,(caps&&caps.images&&caps.images.maxCount)?caps.images.maxCount:(aiMode==='school'?12:8));
@@ -1451,7 +1452,7 @@ en:['[School name]','[Date]','','Dear Parent or Guardian,','','I am [teacher nam
 '- It stays on my own device. It is not posted, uploaded or sent to anyone.',
 '- A fellow teacher or mentor from our school may watch it with me, on my device, to help me improve my teaching. It is not copied to anyone else\'s device.',
 '- I will use it only to reflect on my own teaching. It will not be used to grade, rank or evaluate any learner or any teacher.',
-'- I may use a tool called Salamin. It makes a few low-resolution, blurred still pictures from the video. If I choose AI feedback, these blurred pictures and a written transcript of what was said (with learners\' names removed) may be sent to an AI service (Claude, by Anthropic) to write a draft that I then review. The video file and the audio are not sent.',
+'- I may use a tool called Salamin. It makes a few low-resolution, blurred still pictures from the video. If I choose AI feedback, these blurred pictures and a written transcript of what was said (with learners\' names removed) may be sent to an AI tool (an AI service run by the company Anthropic) to write a draft that I then review. The video file and the audio are not sent.',
 '- I will delete the recording when my reflection is finished.','',
 'Taking part is voluntary. If you do not agree, your child will not be penalized in any way, and I will arrange the camera so your child does not appear, or I will not record that lesson.','',
 'Questions: please contact me at [contact] or the school head, [name].','',
@@ -1462,7 +1463,7 @@ fil:['[Pangalan ng paaralan]','[Petsa]','','Mahal na Magulang o Tagapag-alaga,',
 '- Mananatili ito sa sarili kong device. Hindi ito ipo-post, ia-upload o ipapadala kaninuman.',
 '- Maaaring panoorin ito kasama ko ng isang kapwa guro o mentor mula sa aming paaralan, sa aking device lamang, upang matulungan akong mapabuti ang aking pagtuturo. Hindi ito kokopyahin sa device ng iba.',
 '- Gagamitin ko lamang ito upang pagnilayan ang sarili kong pagtuturo. Hindi ito gagamitin para magbigay ng grado, mag-rank o mag-evaluate ng sinumang mag-aaral o guro.',
-'- Maaari kong gamitin ang isang tool na tinatawag na Salamin. Gumagawa ito ng ilang malabo at mababang-resolusyong larawan mula sa video. Kung pipiliin kong gumamit ng AI feedback, ang mga malabong larawang ito at ang nakasulat na transcript ng mga sinabi sa klase (tinanggal na ang mga pangalan ng mag-aaral) ay maaaring ipadala sa isang AI service (Claude, ng Anthropic) upang gumawa ng draft na susuriin ko pa. Hindi ipinapadala ang mismong video file at ang audio.',
+'- Maaari kong gamitin ang isang tool na tinatawag na Salamin. Gumagawa ito ng ilang malabo at mababang-resolusyong larawan mula sa video. Kung pipiliin kong gumamit ng AI feedback, ang mga malabong larawang ito at ang nakasulat na transcript ng mga sinabi sa klase (tinanggal na ang mga pangalan ng mag-aaral) ay maaaring ipadala sa isang AI tool (AI service ng kumpanyang Anthropic) upang gumawa ng draft na susuriin ko pa. Hindi ipinapadala ang mismong video file at ang audio.',
 '- Buburahin ko ang video kapag tapos na ang aking pagninilay.','',
 'Boluntaryo po ang pagsali. Kung hindi kayo sang-ayon, walang magiging masamang epekto sa inyong anak, at aayusin ko ang camera upang hindi siya makita, o hindi ko ire-record ang klaseng iyon.','',
 'Mga tanong: makipag-ugnayan po sa akin sa [contact] o sa punong-guro, [pangalan].','',
@@ -1474,10 +1475,10 @@ $('#letter-save').addEventListener('click',function(){saveFile('salamin-consent-
 
 /* AI availability */
 var MODE_HELP={
-  claude:'Claude reads only what is listed below, through your Claude account. It asks your permission the first time. Your Claude privacy settings apply. To keep this out of model training, turn off model improvement in Claude under Settings, Privacy.',
+  claude:'The AI reads only what is listed below, through your own account in this app. It asks your permission the first time. Your privacy settings there apply. To keep this out of model training, turn off model improvement under Settings, Privacy.',
   api:'Your browser sends only what is listed below straight to Anthropic with your key. Salamin has no server. API data falls under Anthropic\'s commercial terms and is not used for model training by default. Check your school\'s rules first.',
-  school:'Salamin listens to the lesson on this device and writes down what was said. Then your school\'s Salamin account sends only what is listed below to Claude (Anthropic) and brings back the feedback. The sound and the video never leave this device. Nothing is stored on the way. API data is not used to train models by default.',
-  manual:'Salamin cannot reach Claude from here, so you do it by hand: paste the prompt in Claude chat (and attach the blurred images, if you send images), then paste the reply back. You do this twice, in two separate chats. Use incognito chats if you can: they are not saved to your chat history or used for training.'};
+  school:'Salamin listens to the lesson on this device and writes down what was said. Then your school\'s Salamin account sends only what is listed below to the AI tool, an outside AI service run by Anthropic, and brings back the feedback. The sound and the video never leave this device. Nothing is stored on the way. API data is not used to train models by default.',
+  manual:'Salamin cannot reach the AI from here, so you do it by hand: paste the prompt in your AI chat (and attach the blurred images, if you send images), then paste the reply back. You do this twice, in two separate chats. Use incognito chats if you can: they are not saved to your chat history or used for training.'};
 function aiReady(){
   if(aiMode==='claude')return !!(sample&&caps&&caps.images);
   if(aiMode==='api')return /^sk-ant-/.test($('#apikey').value.trim())&&$('#apimodel').value.trim().length>3;
@@ -1486,10 +1487,10 @@ function aiReady(){
 }
 function setupModes(){
   var sel=$('#aimode'),opts=[];
-  if(sample&&caps&&caps.images)opts.push(['claude','Claude in this page (uses your Claude account)']);
-  if(standalone){if(RELAY&&schoolCode)opts.push(['school','School access (no account needed)']);opts.push(['manual','Copy and paste with Claude chat (no key needed)']);opts.push(['api','My own Anthropic API key'])}
+  if(sample&&caps&&caps.images)opts.push(['claude','AI in this page (uses your own account)']);
+  if(standalone){if(RELAY){if(schoolCode)opts.push(['school','School access (no account needed)'])}else{opts.push(['manual','Copy and paste with an AI chat (no key needed)']);opts.push(['api','My own Anthropic API key'])}}
   sel.innerHTML=opts.map(function(o){return '<option value="'+o[0]+'">'+o[1]+'</option>'}).join('');
-  $('#aibox').hidden=!opts.length;$('#aimode-wrap').hidden=opts.length<2;
+  $('#aibox').hidden=!opts.length&&!(standalone&&RELAY&&!schoolCode);$('#aimode-wrap').hidden=opts.length<2;
   aiMode=opts.length?opts[0][0]:'';
   $('#school-hint').hidden=!(standalone&&RELAY&&!schoolCode);
   applyMode();
@@ -1498,7 +1499,7 @@ function syncSchoolAck(){$('#school-ack').textContent='Tapping Get feedback mean
 function applyMode(){
   $('#api-fields').hidden=aiMode!=='api';
   $('#aimode-help').textContent=MODE_HELP[aiMode]||'';
-  $('#send').textContent=aiMode==='school'?'Get feedback':aiMode==='manual'?'Start the 2 checks with Claude chat':'Get feedback from Claude (2 checks)';
+  $('#send').textContent=aiMode==='school'?'Get feedback':aiMode==='manual'?'Start the 2 checks in your AI chat':'Get feedback (2 checks)';
   $('#ack').closest('label').hidden=aiMode==='school';$('#school-ack').hidden=aiMode!=='school';syncSchoolAck();listenUI();
   updateSend();
 }
@@ -1509,7 +1510,7 @@ function updateAI(){
   if(standalone)return;
   var s=$('#send-status');
   if(s.classList.contains('err')&&!aiReady()&&aiChecked)return;
-  if(!aiChecked){s.textContent='Checking whether Claude is available here…';return}
+  if(!aiChecked){s.textContent='Checking whether AI feedback is available here…';return}
   if(!sample)s.textContent='AI feedback is not available in this view. You can still reflect without it.';
   else if(!(sample&&caps&&caps.images))s.textContent='Image feedback is not available in this view. You can still reflect without it.';
   else if(s.textContent.indexOf('Checking')===0||s.textContent.indexOf('AI feedback is not')===0||s.textContent.indexOf('Image feedback is not')===0)s.textContent='';
@@ -1624,7 +1625,7 @@ p.focus||'(none provided)',
 ' "questions": [string, string, string],',
 ' "goal": string (one sentence, max 20 words)}',
 '',
-'Details: "frames" has one entry per image. "plan" must be [] if no lesson plan was provided. "criteria" has exactly one entry for each criterion id. Use "evident" only when the cited evidence clearly shows it in several moments, "partly" when it shows it in some moments only. Use "not-enough" whenever the available evidence cannot show it. Prefer "not-enough" to guessing. "language" must be null if no transcript was provided. "extra" must be [] if no school criteria were provided (at most 8 entries). "strengths" and "try" have at most 3 items each, grounded in the images, plan or transcript. "patterns" has at most 5 items and "suggestions" at most 3. "limits" lists up to 4 things the evidence could not show. "questions" are 3 short reflection questions for the teacher, and one should be about language use if a transcript was provided. "flow" lists 3 to 8 parts of the lesson in time order, covering the video as far as the evidence shows. Write "from" and "to" like "12:30". Back each part with image numbers, transcript times or an exact quote. Give "flow": [] only if neither the transcript nor the images show the parts. "talk" must be null if no transcript was provided. "exchanges" has up to 6 important moments where the teacher asked something and the learners answered or did not, each quoted exactly with its transcript time. Use "cannot-tell" for "teacher_share" if the transcript has no speaker labels.'
+'Details: "frames" has one entry per image. "plan" must be [] if no lesson plan was provided. "criteria" has exactly one entry for each criterion id. Use "evident" only when the cited evidence clearly shows it in several moments, "partly" when it shows it in some moments only. Use "not-enough" whenever the available evidence cannot show it. Prefer "not-enough" to guessing. "language" must be null if no transcript was provided. "extra" must be [] if no school criteria were provided (at most 8 entries). "strengths" and "try" have at most 3 items each, grounded in the images, plan or transcript. "patterns" has at most 5 items and "suggestions" at most 3. "limits" lists up to 4 different things the evidence could not show, without repeating one in other words. If a transcript was provided, the sound was transcribed, so do not say there was no sound. "questions" are 3 short reflection questions for the teacher, and one should be about language use if a transcript was provided. "flow" lists 3 to 8 parts of the lesson in time order, covering the video as far as the evidence shows. Write "from" and "to" like "12:30". Back each part with image numbers, transcript times or an exact quote. Give "flow": [] only if neither the transcript nor the images show the parts. "talk" must be null if no transcript was provided. "exchanges" has up to 6 important moments where the teacher asked something and the learners answered or did not, each quoted exactly with its transcript time. If the transcript has no speaker labels, or only a few, work out who is speaking from what is said: the teacher usually gives instructions, asks questions and responds to answers; learners usually answer, read aloud or present. Learner voices are often too soft for the recording, so some learner talk may be missing; keep this in mind for "teacher_share". Use "cannot-tell" for "teacher_share" only if you cannot work out who is speaking.'
   ].filter(function(x){return x!==null}).join('\n');
 }
 function normTxt(s){return String(s||'').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu,' ').replace(/\s+/g,' ').trim()}
@@ -1643,9 +1644,10 @@ function trInfo(){
     guessed:lab>0&&gl/lab>0.5,changed:null,
     machine:!!(rv&&rv.src==='auto'),unreviewed:!!(rv&&rv.src==='auto'&&!trReviewed(rv)),trModel:rv&&rv.src==='auto'?(rv.model||'Whisper'):'',reviewNote:trReviewNote(rv),
     cover:(timed&&dur>0)?Math.min(1,mx/dur):null,over:!!(timed&&dur>0&&mx>dur*1.15+30),short:raw.length>0&&raw.length<600,norm:' '+normTxt(raw)+' ',notes:[]};
+  T.inferred=T.has&&!T.labeled;
   if(!T.has)T.notes.push('No transcript: questioning, talk, language, accuracy and checking were not assessed.');
   else{
-    if(!T.labeled)T.notes.push('No speaker labels: teacher talk versus learner talk was not assessed.');
+    if(!T.labeled)T.notes.push('No speaker labels: the AI worked out who was speaking from the words, so talk results are capped at Some evidence.');
     else if(T.guessed)T.notes.push('Most speaker labels are Salamin\'s guesses that the teacher did not confirm, so talk results are capped at Some evidence.');
     if(!T.timed)T.notes.push('No timestamps: wait time was not assessed and cited times could not be checked.');
     if(T.short)T.notes.push('The transcript is very short, so transcript-based results are capped at Some evidence.');
@@ -1668,13 +1670,13 @@ function cite(x,N,T){
 function lockReason(id,T){
   if(T.noimg&&(id==='activity'||id==='safety'))return 'No images were sent, so this cannot be judged from the text.';
   if(NEEDTR[id]&&!T.has)return 'No transcript was added.';
-  if(id==='talk'&&T.has&&!T.labeled)return 'The transcript has no speaker labels, so teacher talk cannot be told from learner talk.';
   return '';
 }
 function capReason(id,T){
   if(id==='safety')return 'Safety usually cannot be judged from blurred, low-resolution frames.';
   if(T.noimg&&id==='structure')return 'No images were sent, so this was judged from the text only.';
   if(NEEDTR[id]&&T.has){
+    if(id==='talk'&&!T.labeled)return 'Who was speaking was worked out from the words, not confirmed.';
     if(id==='talk'&&T.guessed)return 'Most speaker labels are guesses you did not confirm.';
     if(T.unreviewed)return 'The machine-made transcript was not reviewed.';
     if(T.short)return 'The transcript is very short.';
@@ -1701,7 +1703,7 @@ function cleanAI(d,N,times){
     var lk=id?lockReason(id,T):'';
     if(lk){st='not-enough';why=lk}
     else{
-      if(st!=='not-enough'&&ver===0){st='not-enough';why='Claude gave no evidence that could be found in your inputs, so this was not counted.'}
+      if(st!=='not-enough'&&ver===0){st='not-enough';why='The AI gave no evidence that could be found in your inputs, so this was not counted.'}
       else{
         if(st==='evident'&&ct.bad>0)st='partly';
         var cp=id?capReason(id,T):'';
@@ -1749,15 +1751,17 @@ function cleanAI(d,N,times){
       xs.push({time:ot?tm:'',question:qq,kind:['recall','thinking','procedural','check'].indexOf(x.kind)>=0?x.kind:'',response:nr?'no answer heard':(orr?rs:''),followup:str(x.followup,200)});
     });
     var share=['most','about-half','less-than-half','cannot-tell'].indexOf(K.teacher_share)>=0?K.teacher_share:'cannot-tell';
-    if(!T.labeled)share='cannot-tell';
+    
     if(xs.length)tk={summary:str(K.summary,400),share:share,exchanges:xs.slice(0,6)};
   }
-  var gate={frames:N,textOnly:T.noimg,plan:hasPlan,transcript:T.has,labeled:T.labeled,guessed:T.guessed,timed:T.timed,cover:T.cover,machine:T.machine,reviewed:T.has&&!T.unreviewed,trChanged:T.changed,names:nameList().length,hidden:PP.n,trModel:T.trModel,reviewNote:T.reviewNote,notes:T.notes.slice()};
+  var gate={frames:N,textOnly:T.noimg,plan:hasPlan,transcript:T.has,labeled:T.labeled,inferred:!!T.inferred,guessed:T.guessed,timed:T.timed,cover:T.cover,machine:T.machine,reviewed:T.has&&!T.unreviewed,trChanged:T.changed,names:nameList().length,hidden:PP.n,trModel:T.trModel,reviewNote:T.reviewNote,notes:T.notes.slice()};
   return {n:N,times:times,topic:str(d.topic,80)||'Not stated',frames:fr,flow:ph,talk:tk,plan:pl,criteria:cr,language:lg,extra:ex,strengths:items(d.strengths),tries:items(d.try),
-    limits:(Array.isArray(d.limits)?d.limits:[]).map(function(x){return str(x,200)}).filter(Boolean).slice(0,4),questions:q,goal:str(d.goal,140),
+    limits:dedupeLimits((Array.isArray(d.limits)?d.limits:[]).map(function(x){return str(x,200)}).filter(Boolean)).slice(0,4),questions:q,goal:str(d.goal,140),
     chk:chk,gate:gate};
 }
 function toks(s){return normTxt(s).split(' ').filter(function(w){return w.length>2})}
+function nearDup(a,b){var A=toks(a),B=toks(b);if(!A.length||!B.length)return false;var sb={};B.forEach(function(w){sb[w]=1});var i=0;A.forEach(function(w){if(sb[w])i++});return i/(A.length+B.length-i)>=0.5||i/Math.min(A.length,B.length)>=0.75}
+function dedupeLimits(L){var out=[];L.forEach(function(x){if(!out.some(function(y){return nearDup(x,y)}))out.push(x)});return out}
 function sim(a,b){var A=toks(a),B=toks(b);if(!A.length||!B.length)return 0;var sb={};B.forEach(function(w){sb[w]=1});var i=0;A.forEach(function(w){if(sb[w])i++});return Math.min(1,i/(A.length+B.length-i))}
 function copyO(o){return JSON.parse(JSON.stringify(o))}
 function shareAnchor(x,y){
@@ -1811,7 +1815,7 @@ function merge(A,B){
     var xs2=A.talk.exchanges.filter(function(x){var ok=B.talk.exchanges.some(function(y){return (x.time&&y.time&&Math.abs(toSec(x.time)-toSec(y.time))<=3)||sim(x.question,y.question)>=0.5});if(!ok)dropped++;return ok});
     if(xs2.length)out.talk={summary:A.talk.summary,share:A.talk.share===B.talk.share?A.talk.share:'cannot-tell',exchanges:xs2};
   }
-  var lim=A.limits.slice();B.limits.forEach(function(x){if(!lim.some(function(y){return sim(x,y)>=0.6}))lim.push(x)});out.limits=lim.slice(0,5);
+  out.limits=dedupeLimits(A.limits.concat(B.limits)).slice(0,5);
   out.check={citesOk:A.chk.ok+B.chk.ok,citesBad:A.chk.bad+B.chk.bad,removed:A.chk.removed+B.chk.removed,dropped:dropped,cons:cons,gate:A.gate};
   delete out.chk;delete out.gate;
   return out;
@@ -1822,22 +1826,22 @@ function aiError(e){
   if(c==='school_code')return 'This device\'s Salamin access was not accepted. Ask your coordinator for the current Salamin link and open it once.';
   if(c==='school_setup')return 'Salamin\'s AI service is not set up correctly yet. Tell your coordinator. You can still reflect without AI.';
   if(c==='school_network')return 'Could not reach Salamin\'s AI service. Check your internet connection and try again.';
-  if(c==='no_credit')return e.school?'Salamin\'s AI credit has run out. Tell your coordinator. You can still reflect without AI.':'Your API credit has run out. Add credit in the Claude Console, or switch to copy and paste.';
-  if(c==='not_granted')return 'You did not allow Claude, so nothing was sent. You can still reflect without AI.';
-  if(c==='rate_limited')return 'Too many requests or your Claude usage limit was reached. Try again later.';
-  if(c==='invalid_json'||c==='empty_completion')return 'Claude\'s reply could not be used. Tap the button to try again.';
+  if(c==='no_credit')return e.school?'Salamin\'s AI credit has run out. Tell your coordinator. You can still reflect without AI.':'Your API credit has run out. Add credit in the Anthropic Console, or switch to copy and paste.';
+  if(c==='not_granted')return 'You did not allow AI access, so nothing was sent. You can still reflect without AI.';
+  if(c==='rate_limited')return 'Too many requests, or the AI usage limit was reached. Try again later.';
+  if(c==='invalid_json'||c==='empty_completion')return 'The AI\'s reply could not be used. Tap the button to try again.';
   if(c==='image_rejected'||c==='images_unavailable')return 'The images were not accepted. Make a new preview, or skip AI.';
-  if(c==='session_expired')return 'Please sign in to Claude again, then retry.';
-  if(c==='refused')return 'Claude declined this input. Skip AI and reflect on your own.';
+  if(c==='session_expired')return 'Please sign in to your AI account again, then retry.';
+  if(c==='refused')return 'The AI declined this input. Skip AI and reflect on your own.';
   if(c==='too_long')return 'The text is too long to send. Shorten the transcript or the lesson plan.';
   if(c==='bad_key')return 'Anthropic did not accept that API key. Check the key and your API credit, then try again.';
   if(c==='network')return 'Could not reach Anthropic. Check your connection. A school network may block it. You can switch to copy and paste.';
   if(c==='same_reply')return 'Check 2 gave the same reply as check 1. Use a different new chat for each check.';
   if(c==='bad_model')return 'Anthropic did not find that model name. Check the Model box, for example claude-sonnet-5-5.';
-  if(c==='overloaded')return 'Anthropic is busy right now. Wait a minute and try again.';
-  if(c==='cut_off')return 'Claude\'s reply was cut off before it finished. Try again.';
+  if(c==='overloaded')return 'The AI service is busy right now. Wait a minute and try again.';
+  if(c==='cut_off')return 'The AI\'s reply was cut off before it finished. Try again.';
   if(typeof c==='string'&&c.indexOf('api_')===0)return 'Anthropic returned an error ('+c.slice(4)+(e.msg?': '+e.msg:'')+'). Try again, or switch to copy and paste.';
-  return 'Something went wrong while contacting Claude. Try again, or skip AI.';
+  return 'Something went wrong while contacting the AI. Try again, or skip AI.';
 }
 function blobB64(b){return new Promise(function(res,rej){var fr=new FileReader();fr.onload=function(){res(String(fr.result).split(',')[1]||'')};fr.onerror=function(){rej({code:'image_rejected'})};fr.readAsDataURL(b)})}
 function parseLoose(t){
@@ -1893,7 +1897,7 @@ function labelFrames(){
 function manualRound(r,signal){
   return new Promise(function(resolve,reject){
     var ov=$('#manual'),st=$('#mn-status');
-    $('#mn-title').textContent='Check '+r+' of 2 with Claude chat';
+    $('#mn-title').textContent='Check '+r+' of 2 in your AI chat';
     $('#mn-new').textContent=r===1?'new chat':'different NEW chat (not the one from check 1)';
     $('#mn-prompt').value=buildPrompt(true);$('#mn-reply').value='';st.textContent='';st.className='status';$('#mn-dl').closest('li').hidden=textOnly();
     ov.hidden=false;$('#manual .sheet').focus();
@@ -1912,7 +1916,7 @@ function manualRound(r,signal){
         var d=parseLoose(txt);
         if(r===2&&txt.trim()===lastReply){st.className='status err';st.textContent=aiError({code:'same_reply'});return}
         lastReply=txt.trim();cleanup();resolve(d);
-      }catch(e){st.className='status err';st.textContent='That does not look like Claude\'s reply. Copy the whole reply, from the first { to the last }.'}
+      }catch(e){st.className='status err';st.textContent='That does not look like the AI\'s reply. Copy the whole reply, from the first { to the last }.'}
     };
   });
 }
@@ -1924,7 +1928,7 @@ async function callAI(r,blobs,times){
 }
 $('#send').addEventListener('click',async function(){
   if(!aiReady()||!isFresh()||!(aiMode==='school'||$('#ack').checked)||ctl)return;
-  if(aiMode==='school'&&TX.w){sendAfterTx=true;updateSend();var s0=$('#send-status');s0.className='status';s0.textContent='Salamin will send it to Claude as soon as it finishes listening. Keep this page open.';return}
+  if(aiMode==='school'&&TX.w){sendAfterTx=true;updateSend();var s0=$('#send-status');s0.className='status';s0.textContent='Salamin will send it to the AI tool as soon as it finishes listening. Keep this page open.';return}
   lastReply='';
   var tOnly=textOnly(),N=tOnly?0:frames.length,times=tOnly?[]:frames.map(function(f){return f.t}),blobs=tOnly?[]:frames.map(function(f){return f.blob});
   ctl=new AbortController();
@@ -1934,7 +1938,7 @@ $('#send').addEventListener('click',async function(){
     var runs=[];
     if(aiMode==='claude'&&caps&&caps.maxPromptBytes&&new TextEncoder().encode(buildPrompt()).length>caps.maxPromptBytes*0.9)throw {code:'too_long'};
     for(var r=1;r<=2;r++){
-      s.textContent=aiMode==='manual'?'Check '+r+' of 2. Follow the steps in the window.':aiMode==='school'?'Check '+r+' of 2. Claude is reading your '+(tOnly?'text':'images and text')+'. Each check can take up to a minute.':aiMode==='api'?'Check '+r+' of 2. Sending to Anthropic with your key. This can take up to a minute.':'Check '+r+' of 2. Claude is reading your '+(tOnly?'text':'frames and text')+'. Each check can take up to a minute. Claude asks your permission the first time.';
+      s.textContent=aiMode==='manual'?'Check '+r+' of 2. Follow the steps in the window.':aiMode==='school'?'Check '+r+' of 2. The AI is reading your '+(tOnly?'text':'images and text')+'. Each check can take up to a minute.':aiMode==='api'?'Check '+r+' of 2. Sending to Anthropic with your key. This can take up to a minute.':'Check '+r+' of 2. The AI is reading your '+(tOnly?'text':'frames and text')+'. Each check can take up to a minute. It asks your permission the first time.';
       var data=await callAI(r,blobs,times);
       var one=cleanAI(data,N,times);
       if(!one.frames.length&&!one.plan.length&&!one.strengths.length&&!one.tries.length&&!one.language&&!one.extra.length&&!one.criteria.some(function(c){return c.status!=='not-enough'}))throw {code:'invalid_json'};
@@ -1955,7 +1959,7 @@ function refTxt(o){var p=[],im=o.images||o.frames||[];if(im.length)p.push((im.le
 function checkLines(a){
   var c=a.check,g=c.gate,L=[],ev=[g.frames?g.frames+' images':'no images (text only)'];
   if(g.plan)ev.push('lesson plan');
-  if(g.transcript)ev.push('transcript ('+(g.machine?'made by speech recognition, '+(g.reviewNote||'not reviewed')+', ':'')+(g.labeled?(g.guessed?'speaker labels, mostly guessed':'speaker labels'):'no speaker labels')+', '+(g.timed?'timestamps':'no timestamps')+(g.cover!=null?', covers '+Math.round(g.cover*100)+'% of the video':'')+')');
+  if(g.transcript)ev.push('transcript ('+(g.machine?'made by speech recognition, '+(g.reviewNote||'not reviewed')+', ':'')+(g.labeled?(g.guessed?'speaker labels, mostly guessed':'speaker labels'):(g.inferred?'speakers worked out from the words':'no speaker labels'))+', '+(g.timed?'timestamps':'no timestamps')+(g.cover!=null?', covers '+Math.round(g.cover*100)+'% of the video':'')+')');
   L.push(['Evidence used: ',ev.join(', ')+'.']);
   if(g.trChanged!=null)L.push(['Transcript corrections: ','while reviewing, the teacher changed about '+g.trChanged+'% of the words Salamin wrote. This is a rough measure of how accurate the speech recognition was for this class.']);
   var tot=c.citesOk+c.citesBad;
@@ -1976,7 +1980,7 @@ function checkHTML(a){
   var h='<ul class="list trust">'+checkLines(a).map(function(l){return '<li><b>'+esc(l[0])+'</b>'+esc(l[1])+'</li>'}).join('')+'</ul>';
   var m=marksCount();
   if(m.total>=3&&m.disagree>m.agree)h+='<p class="warnline">You disagreed with most of these comments. Treat this report as unreliable for this lesson.</p>';
-  h+='<p class="small muted" style="margin-top:10px">Software can check that quotes and times exist. It cannot check that Claude '+(a.n?'read the images or ':'')+'understood the Filipino. Only you can.</p>';
+  h+='<p class="small muted" style="margin-top:10px">Software can check that quotes and times exist. It cannot check that the AI '+(a.n?'read the images or ':'')+'understood the Filipino. Only you can.</p>';
   return h;
 }
 function li(arr,t){return arr.map(function(x,i){return '<li><span>'+esc(x.text)+(refTxt(x)?'<span class="ref">'+esc(refTxt(x))+'</span>':'')+'</span><button class="x" type="button" data-del="'+t+':'+i+'" aria-label="Discard this">×</button></li>'}).join('')}
@@ -1984,7 +1988,7 @@ function renderReport(){
   var a=state.ai;renderUse();
   $('#r-meta').textContent=metaLine();
   var b=$('#r-banner');
-  if(a){b.hidden=false;b.textContent='Draft for your own reflection, made from '+(a.n?a.n+' low-resolution frames'+(a.check.gate.transcript?(a.check.gate.machine?' and the transcript Salamin made':' and the transcript you added'):''):'the text you added, with no images')+'. Not an evaluation. Software checked that cited quotes and times exist and that two separate checks agree. It cannot tell whether Claude read '+(a.n?'the images or ':'')+'the Filipino correctly. You decide what is true.'}else b.hidden=true;
+  if(a){b.hidden=false;b.textContent='Draft for your own reflection, made from '+(a.n?a.n+' low-resolution frames'+(a.check.gate.transcript?(a.check.gate.machine?' and the transcript Salamin made':' and the transcript you added'):''):'the text you added, with no images')+'. Not an evaluation. Software checked that cited quotes and times exist and that two separate checks agree. It cannot tell whether the AI read '+(a.n?'the images or ':'')+'the Filipino correctly. You decide what is true.'}else b.hidden=true;
   $('#c-check').hidden=!a;if(a)$('#r-check').innerHTML=checkHTML(a);
   $('#c-mom').hidden=!state.moments.length;
   $('#r-mom').innerHTML=state.moments.map(function(m){return '<li><b>'+fmt(m.t)+'</b> '+esc(m.note)+'</li>'}).join('');
@@ -1993,7 +1997,7 @@ function renderReport(){
   $('#c-talk').hidden=!(a&&a.talk);
   if(a&&a.talk){
     var TK=a.talk;
-    $('#r-talk').innerHTML=(TK.summary?'<p>'+esc(TK.summary)+'</p>':'')+(SHARE_LABEL[TK.share]?'<p class="small"><b>'+esc(SHARE_LABEL[TK.share])+'</b>'+(a.check&&a.check.gate&&a.check.gate.guessed?' This uses Salamin\u2019s guesses of who was speaking.':'')+'</p>':'')+
+    $('#r-talk').innerHTML=(TK.summary?'<p>'+esc(TK.summary)+'</p>':'')+(SHARE_LABEL[TK.share]?'<p class="small"><b>'+esc(SHARE_LABEL[TK.share])+'</b>'+(a.check&&a.check.gate&&a.check.gate.inferred?' An estimate: the AI worked out who was speaking from the words, and soft learner voices are often missing from the recording.':a.check&&a.check.gate&&a.check.gate.guessed?' This uses Salamin\u2019s guesses of who was speaking.':'')+'</p>':'')+
       (TK.exchanges.length?'<ul class="items">'+TK.exchanges.map(function(x,i){return '<li><span>'+(x.time?'<b>'+esc(x.time)+'</b> ':'')+'Teacher: '+(x.question?'\u201c'+esc(x.question)+'\u201d':'(quote not kept in the saved draft)')+(KIND_LABEL[x.kind]?' <span class="st">'+esc(KIND_LABEL[x.kind])+'</span>':'')+(x.response?'<span class="ref">Learners: '+(x.response==='no answer heard'?'no answer heard':'\u201c'+esc(x.response)+'\u201d')+'</span>':'')+(x.followup?'<span class="ref">Then: '+esc(x.followup)+'</span>':'')+'</span><button class="x" type="button" data-del="talk:'+i+'" aria-label="Discard this">\u00d7</button></li>'}).join('')+'</ul>':'');
   }
   $('#c-flow').hidden=!(a&&a.frames.length);
@@ -2014,13 +2018,13 @@ function renderReport(){
     var LG=a.language;
     $('#r-lang').innerHTML=(LG.summary?'<p>'+esc(LG.summary)+'</p>':'')+
       (LG.patterns.length?'<ul class="items">'+LG.patterns.map(function(x,i){return '<li><span><b>'+esc(x.label)+'</b>'+(x.example||x.time?'<span class="ref">'+(x.time?esc(x.time)+(x.example?': ':''):'')+esc(x.example)+'</span>':'')+'</span><button class="x" type="button" data-del="lang:'+i+'" aria-label="Discard this">×</button></li>'}).join('')+'</ul>':'')+
-      (LG.suggestions.length?'<h4 style="margin-top:12px">Ideas to try</h4><ul class="list">'+LG.suggestions.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'');
+      (LG.suggestions.length?'<h3 style="margin-top:12px;font-size:1rem">Ideas to try</h3><ul class="list">'+LG.suggestions.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'');
   }
   $('#c-extra').hidden=!(a&&a.extra.length);
   if(a)$('#r-extra').innerHTML=a.extra.map(function(x,i){return '<li><span><b>'+esc(x.criterion)+'</b> <span class="st '+esc(x.status)+'">'+esc(CRIT_LABEL[x.status]||'')+'</span>'+(x.evidence?'<span class="ref">'+esc(x.evidence)+(refTxt(x)?' ('+esc(refTxt(x))+')':'')+'</span>':(x.why?'<span class="ref">'+esc(x.why)+'</span>':''))+'</span><button class="x" type="button" data-del="extra:'+i+'" aria-label="Discard this">×</button></li>'}).join('');
   $('#c-str').hidden=!(a&&a.strengths.length);if(a)$('#r-str').innerHTML=li(a.strengths,'str');
   $('#c-try').hidden=!(a&&a.tries.length);if(a)$('#r-try').innerHTML=li(a.tries,'try');
-  var tl=!!(a&&!a.n);$('#lim-h').textContent=tl?'What the text cannot show':'What still frames cannot show';$('#lim-p').textContent=tl?'What learners did, the room and safety need images or a person in the room. Rate those yourself below.':'Questioning, discussion and explanations need a transcript, audio or a person in the room. Rate those yourself below.';
+  var tl=!!(a&&!a.n),htr=!!(a&&a.check&&a.check.gate&&a.check.gate.transcript);$('#lim-h').textContent=tl?'What the text cannot show':htr?'What the evidence could not show':'What still frames cannot show';$('#lim-p').textContent=tl?'What learners did, the room and safety need images or a person in the room. Rate those yourself below.':htr?'A transcript and a few still images miss some things, such as soft voices and what happens between images. Rate those yourself below.':'Questioning, discussion and explanations need a transcript, audio or a person in the room. Rate those yourself below.';
   $('#c-lim').hidden=!(a&&a.limits.length);if(a)$('#r-lim').innerHTML=a.limits.map(function(x){return '<li>'+esc(x)+'</li>'}).join('');
   renderSelf();
   var qs=a?a.questions:DEFQ;
@@ -2083,14 +2087,14 @@ function metaLine(){
   return (bits.length?bits.join(', ')+'. ':'')+'Round '+state.round+', '+state.date+'.'+(a&&a.topic&&a.topic!=='Not stated'?' Topic: '+a.topic+'.':'');
 }
 function aiUse(a){
-  var via=a.via==='api'?' through the Anthropic API'+(a.model?' (model '+a.model+')':''):a.via==='manual'?' in Claude chat, by copy and paste':a.via==='claude'?' through the teacher\'s Claude account':a.via==='school'?' through the school\'s Salamin account (Anthropic API'+(a.model?', model '+a.model:'')+')':'';
+  var via=a.via==='api'?' through the teacher\'s own key for an AI service run by Anthropic':a.via==='manual'?' in an AI chat, by copy and paste':a.via==='claude'?' through the teacher\'s own AI account':a.via==='school'?' through the school\'s Salamin account (an AI service run by Anthropic)':'';
   var g=a.check.gate,inp=[a.n?a.n+' blurred, low-resolution still image'+(a.n===1?'':'s'):'no images (text only)'];
   if(g.plan)inp.push('the lesson plan');if(g.transcript)inp.push(g.machine?'a transcript made on this device by speech recognition ('+(g.trModel||'Whisper')+'), '+(g.reviewNote||'not reviewed')+(g.trChanged!=null?', about '+g.trChanged+'% of its words corrected by the teacher':''):'a transcript of the class talk supplied by the teacher');if(a.extra.length)inp.push('the school\'s criteria');
   var m=marksCount(),k=a.criteria.filter(function(c){return c.status!=='not-enough'}).length;
   var rev=m.total?'The teacher marked '+m.total+' of '+k+' comments ('+m.agree+' agree, '+m.disagree+' disagree, '+m.unsure+' not sure)':'The teacher has not marked the comments yet';
   if(a.discarded)rev+=' and discarded '+a.discarded+' line'+(a.discarded===1?'':'s');
   var nm=g.names?(g.hidden?g.hidden+(g.hidden===1?' mention of a listed name was':' mentions of listed names were')+' replaced with [name] before sending.':'none of the listed names were found in the text.'):'no names were listed, so none were replaced.';
-  return 'AI use: draft feedback written by Claude (Anthropic)'+via+', run twice and compared. Inputs: '+inp.join(', ')+'. Names: '+nm+' '+(a.n?'The video file and audio were not sent.':'No images, video or audio were sent.')+' Software checked that cited quotes and times exist in the transcript. '+rev+'.';
+  return 'AI use: draft feedback written by an AI tool'+via+', run twice and compared. Inputs: '+inp.join(', ')+'. Names: '+nm+' '+(a.n?'The video file and audio were not sent.':'No images, video or audio were sent.')+' Software checked that cited quotes and times exist in the transcript. '+rev+'.';
 }
 function blocks(){
   var a=state.ai,B=[],F=formalOk(),who=state.prepBy.trim(),sch=state.school.trim();
@@ -2103,7 +2107,7 @@ function blocks(){
   if(a)B.push({t:'note',x:aiUse(a)});
   if(state.moments.length){B.push({t:'h',x:'Moments you marked'});state.moments.forEach(function(m){B.push({t:'li',x:fmt(m.t)+(m.note?'  '+sx(m.note):'')})})}
   if(a&&a.flow&&a.flow.length){B.push({t:'h',x:'Lesson flow'});a.flow.forEach(function(p){B.push({t:'li',x:fmt(p.from)+'\u2013'+fmt(p.to)+(p.phase?'  '+p.phase:'')+(p.what?': '+p.what:'')+(p.quote?' \u201c'+p.quote+'\u201d':'')+(refTxt(p)?' ('+refTxt(p)+')':'')})})}
-  if(a&&a.talk){B.push({t:'h',x:'Talk in the class'});if(a.talk.summary)B.push({t:'p',x:a.talk.summary});if(SHARE_LABEL[a.talk.share])B.push({t:'p',x:SHARE_LABEL[a.talk.share]});a.talk.exchanges.forEach(function(x){B.push({t:'li',x:(x.time?x.time+'  ':'')+'Teacher: '+(x.question?'\u201c'+x.question+'\u201d':'(question)')+(KIND_LABEL[x.kind]?' ['+KIND_LABEL[x.kind]+']':'')+(x.response?' Learners: '+(x.response==='no answer heard'?'no answer heard':'\u201c'+x.response+'\u201d'):'')+(x.followup?' Then: '+x.followup:'')})})}
+  if(a&&a.talk){B.push({t:'h',x:'Talk in the class'});if(a.talk.summary)B.push({t:'p',x:a.talk.summary});if(SHARE_LABEL[a.talk.share])B.push({t:'p',x:SHARE_LABEL[a.talk.share]+(a.check&&a.check.gate&&a.check.gate.inferred?' (An estimate: who was speaking was worked out from the words, and soft learner voices are often missing.)':a.check&&a.check.gate&&a.check.gate.guessed?' (Based on guessed speakers.)':'')});a.talk.exchanges.forEach(function(x){B.push({t:'li',x:(x.time?x.time+'  ':'')+'Teacher: '+(x.question?'\u201c'+x.question+'\u201d':'(question)')+(KIND_LABEL[x.kind]?' ['+KIND_LABEL[x.kind]+']':'')+(x.response?' Learners: '+(x.response==='no answer heard'?'no answer heard':'\u201c'+x.response+'\u201d'):'')+(x.followup?' Then: '+x.followup:'')})})}
   if(a&&a.frames.length){B.push({t:'h',x:'What the images show'});a.frames.forEach(function(f){B.push({t:'li',x:fmt(a.times[f.n-1])+'  '+SETTING_LABEL[f.setting]+': '+f.note})})}
   if(a&&a.plan.length){B.push({t:'h',x:'Lesson plan and what was visible'});a.plan.forEach(function(p){B.push({t:'li',x:p.step+' ['+STATUS_LABEL[p.status]+']'+(p.evidence?' '+p.evidence+(refTxt(p)?' ('+refTxt(p)+')':''):'')})})}
   if(a&&a.criteria){
@@ -2115,13 +2119,13 @@ function blocks(){
   if(a&&a.language){
     B.push({t:'h',x:'Language use'});
     if(a.language.summary)B.push({t:'p',x:a.language.summary});
-    a.language.patterns.forEach(function(x){B.push({t:'li',x:x.label+(x.example||x.time?' ('+(x.time?x.time+': ':'')+x.example+')':'')})});
+    a.language.patterns.forEach(function(x){B.push({t:'li',x:x.label+(x.example||x.time?' ('+[x.time,x.example].filter(Boolean).join(': ')+')':'')})});
     a.language.suggestions.forEach(function(x){B.push({t:'li',x:'Idea: '+x})});
   }
   if(a&&a.extra.length){B.push({t:'h',x:'School criteria'});a.extra.forEach(function(x){B.push({t:'li',x:x.criterion+' ['+CRIT_LABEL[x.status]+']'+(x.evidence?' '+x.evidence+(refTxt(x)?' ('+refTxt(x)+')':''):'')})})}
   if(a&&a.strengths.length){B.push({t:'h',x:'What went well'});a.strengths.forEach(function(s){B.push({t:'li',x:s.text+(refTxt(s)?' ('+refTxt(s)+')':'')})})}
   if(a&&a.tries.length){B.push({t:'h',x:'Try next'});a.tries.forEach(function(s){B.push({t:'li',x:s.text+(refTxt(s)?' ('+refTxt(s)+')':'')})})}
-  if(a&&a.limits.length){B.push({t:'h',x:a.n?'What still frames cannot show':'What the text cannot show'});a.limits.forEach(function(s){B.push({t:'li',x:s})})}
+  if(a&&a.limits.length){B.push({t:'h',x:!a.n?'What the text cannot show':(a.check&&a.check.gate&&a.check.gate.transcript)?'What the evidence could not show':'What still frames cannot show'});a.limits.forEach(function(s){B.push({t:'li',x:s})})}
   var rated=CORE.filter(function(c){return state.ratings[c[0]]>0});
   if(rated.length){B.push({t:'h',x:'Self rating'});rated.forEach(function(c){B.push({t:'li',x:c[1]+': '+LEVELS[state.ratings[c[0]]]})})}
   var cmp=compare();
@@ -2172,7 +2176,7 @@ function csvCell(v){v=String(v==null?'':v);if(/^[=+\-@]/.test(v))v="'"+v;return 
 function pilotCSV(){
   var a=state.ai,g=a.check.gate,rows=[['lesson_code','round','date','subject','grade','criterion_id','criterion','ai_result','ai_note','two_checks','teacher_mark','images_sent','transcript','transcript_reviewed','transcript_words_changed_pct','speaker_labels','ai_route','observer_result','observer_note']];
   a.criteria.forEach(function(c){var d=CRITERIA.filter(function(x){return x.id===c.id})[0];if(!d)return;
-    rows.push([sx(state.pilot.trim()),state.round,state.date,sx(state.subject.trim()),sx(state.grade.trim()),c.id,d.name,CRIT_LABEL[c.status]||c.status,c.status==='not-enough'&&c.why?c.why:'',{agree:'same',near:'slightly different',unstable:'disagreed'}[c.consistency]||'',state.marks[c.id]||'',a.n,g.transcript?(g.machine?'Salamin '+(g.trModel||'Whisper'):'teacher'):'none',g.transcript?(g.reviewed?'yes':'no'):'',g.trChanged!=null?g.trChanged:'',g.transcript?(g.labeled?(g.guessed?'mostly guessed':'yes'):'no'):'',a.via||'','','']);
+    rows.push([sx(state.pilot.trim()),state.round,state.date,sx(state.subject.trim()),sx(state.grade.trim()),c.id,d.name,CRIT_LABEL[c.status]||c.status,c.status==='not-enough'&&c.why?c.why:'',{agree:'same',near:'slightly different',unstable:'disagreed'}[c.consistency]||'',state.marks[c.id]||'',a.n,g.transcript?(g.machine?'Salamin '+(g.trModel||'Whisper'):'teacher'):'none',g.transcript?(g.reviewed?'yes':'no'):'',g.trChanged!=null?g.trChanged:'',g.transcript?(g.labeled?(g.guessed?'mostly guessed':'yes'):(g.inferred?'inferred from words':'no')):'',a.via||'','','']);
   });
   return rows.map(function(r){return r.map(csvCell).join(',')}).join('\r\n');
 }
@@ -2209,7 +2213,7 @@ $('#sh-close').addEventListener('click',closeSheet);
 $('#sheet').addEventListener('click',function(e){if(e.target.id==='sheet')closeSheet()});
 document.addEventListener('keydown',function(e){
   if(e.key!=='Escape')return;
-  /* Close only the window on top. The copy box can sit over the Claude chat window. */
+  /* Close only the window on top. The copy box can sit over the AI chat window. */
   var open=$$('.overlay').filter(function(o){return !o.hidden});if(!open.length)return;
   var top=open[open.length-1].id;
   if(top==='review')rvClose();else if(top==='copybox')closeCopy();else if(top==='manual')$('#mn-cancel').click();else if(top==='critsheet')closeCrit();else if(top==='sheet')closeSheet();
@@ -2272,7 +2276,7 @@ function vAI(a){
     limits:(Array.isArray(a.limits)?a.limits:[]).map(function(x){return vStr(x,200)}).filter(Boolean).slice(0,5),
     questions:q,goal:vStr(a.goal,140),textOnly:!N,madeIn:okv(a.madeIn,['quick','formal'],'quick'),via:okv(a.via,['claude','api','manual','school'],''),model:vStr(a.model,60),discarded:vInt(a.discarded,0,999),
     check:{citesOk:vInt(c.citesOk,0,9999),citesBad:vInt(c.citesBad,0,9999),removed:vInt(c.removed,0,9999),dropped:vInt(c.dropped,0,9999),cons:{agree:vInt(cons.agree,0,99),near:vInt(cons.near,0,99),unstable:vInt(cons.unstable,0,99)},
-      gate:{frames:vInt(g.frames,0,12),textOnly:!N,plan:!!g.plan,transcript:!!g.transcript,labeled:!!g.labeled,guessed:!!g.guessed,trChanged:(typeof g.trChanged==='number'&&isFinite(g.trChanged))?clamp(g.trChanged,0,100):null,timed:!!g.timed,machine:!!g.machine,reviewed:!!g.reviewed,names:vInt(g.names,0,999),hidden:vInt(g.hidden,0,99999),trModel:vStr(g.trModel,30),reviewNote:vStr(g.reviewNote,80),cover:(typeof g.cover==='number'&&isFinite(g.cover))?clamp(g.cover,0,1):null,notes:(Array.isArray(g.notes)?g.notes:[]).map(function(x){return vStr(x,240)}).filter(Boolean).slice(0,6)}}
+      gate:{frames:vInt(g.frames,0,12),textOnly:!N,plan:!!g.plan,transcript:!!g.transcript,labeled:!!g.labeled,inferred:!!g.inferred,guessed:!!g.guessed,trChanged:(typeof g.trChanged==='number'&&isFinite(g.trChanged))?clamp(g.trChanged,0,100):null,timed:!!g.timed,machine:!!g.machine,reviewed:!!g.reviewed,names:vInt(g.names,0,999),hidden:vInt(g.hidden,0,99999),trModel:vStr(g.trModel,30),reviewNote:vStr(g.reviewNote,80),cover:(typeof g.cover==='number'&&isFinite(g.cover))?clamp(g.cover,0,1):null,notes:(Array.isArray(g.notes)?g.notes:[]).map(function(x){return vStr(x,240)}).filter(Boolean).slice(0,6)}}
   };
 }
 function cleanDraft(d){

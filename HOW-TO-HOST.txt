@@ -52,13 +52,13 @@ SALAMIN - paano gamitin at i-host
       - Optional na sariling address (hal. salamin.layagilayaresearchjournal.org): Settings > Pages > Custom domain,
         tapos CNAME record sa domain provider: salamin -> USERNAME.github.io.
 
-3) AI feedback (opsyonal) - pumili sa Step 2:
-   - Copy and paste with Claude chat: walang key. Ida-download mo ang blurred images, ia-attach sa Claude chat kasama ang prompt,
-     at ipe-paste pabalik ang sagot. Dalawang magkahiwalay na chat para sa dalawang check.
-   - Sariling Anthropic API key: ilalagay mo sa app, nasa open tab lang, hindi sine-save. Direkta sa Anthropic ang padala.
-     May hiwalay na singil ang API sa Claude subscription. Basahin ang data terms ng Anthropic at ang patakaran ng school.
+3) AI feedback (opsyonal):
+   - Sa school website: buksan ang school link (may #code sa dulo) isang beses sa bawat device. Isang tap na lang ang feedback,
+     at walang account na kailangan ang guro. Sa school website, ito lang ang paraan ng AI feedback.
+   - Sa downloaded na Salamin.html, puwedeng copy and paste sa isang AI chat (walang key), o sariling API key
+     (nasa open tab lang, hindi sine-save; direkta sa AI service ng Anthropic ang padala, at may sariling singil ito).
    - O i-skip ang AI at mag-reflect lang.
-   - "No images (text only)" sa Step 2: walang larawang lalabas sa device. Transcript at lesson details lang ang babasahin ng Claude.
+   - "No images (text only)" sa Step 2: walang larawang lalabas sa device. Transcript at lesson details lang ang babasahin ng AI.
      Hindi nito mahuhusgahan ang ginagawa ng learners, ang ayos ng room at ang safety, at nakasulat ito sa report.
      Ito rin ang gamitin kung tunog lang ang recording, o kung hindi ma-play ng browser ang video (hal. iPhone HEVC).
 
@@ -71,17 +71,17 @@ SALAMIN - paano gamitin at i-host
      at ilista ito sa DepEd AI Registry. Isama ito sa project proposal.
    - Alamin sa school head o Data Protection Officer kung kailangan ng AI Use Declaration (Annex A ng order).
    - Ang report ng Salamin ay may "AI use" statement para sa disclosure.
-   - Bawal sa order ang facial recognition at emotion recognition. Hindi ito ginagawa ng Salamin,
-     at sinasabihan ang Claude na huwag kilalanin ang sinuman at huwag hulaan ang emosyon.
+   - Bawal sa order ang facial recognition. Hindi ito ginagawa ng Salamin,
+     at sinasabihan ang AI na huwag kilalanin ang sinuman at huwag hulaan ang emosyon.
    - Self-reflection lang ito. Kapag ginamit sa appraisal ng guro, magiging high-risk na AI use ito.
 
-6) Privacy sa Claude:
+6) Privacy sa AI service:
    - Copy and paste mode: gumamit ng incognito chat (ghost icon) para hindi ma-save sa history at hindi magamit sa training.
-   - O i-off ang model improvement sa Claude: Settings > Privacy.
+   - O i-off ang model improvement sa AI chat app: Settings > Privacy.
    - API mode: commercial terms, hindi ginagamit sa training by default.
 
 7) Paggawa ng transcript sa loob ng app:
-   - Gumagana sa downloaded na Salamin.html at sa installed app. Hindi ito gumagana sa loob ng Claude.
+   - Gumagana sa downloaded na Salamin.html at sa installed app. Hindi ito gumagana sa loob ng isang AI chat app.
    - Sa device mismo ginagawa ang transcript; hindi ina-upload ang tunog ng video.
    - Sa hosted app, kasama na sa lib folder ang speech engine, kaya hindi na kailangan ang cdn.jsdelivr.net.
      Ang downloaded na Salamin.html ay kumukuha pa rin nito sa cdn.jsdelivr.net sa unang beses.
