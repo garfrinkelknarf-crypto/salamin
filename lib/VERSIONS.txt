@@ -1,0 +1,5 @@
+Speech engine files used by Salamin, unchanged from their npm packages:
+- transformers.min.js: @huggingface/transformers 4.3.2 (Apache-2.0)
+- mediabunny.min.mjs: mediabunny 1.66.2 (MPL-2.0)
+- ort-wasm-simd-threaded.asyncify.mjs, and the .wasm stored gzip-compressed as .wasm.gz: onnxruntime-web 1.31.0-dev.20260914-8d85527a0 (MIT)
+License texts are in the licenses folder.

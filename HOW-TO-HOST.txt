@@ -1,0 +1,91 @@
+SALAMIN - paano gamitin at i-host
+
+1) Pinakamadali (laptop): buksan ang Salamin.html (double-click) sa Chrome, Edge o Safari.
+   Walang install, walang account. Gumagana ito offline. Ang video ay hindi na-uupload kahit saan.
+
+2) Website at app sa phone, gaya ng LIRJ site (GitHub Pages, libre):
+   a. Mag-sign in sa GitHub gamit ang account ng LIRJ site. New repository > pangalan: salamin > Public > Create repository.
+   b. I-unzip ang salamin-site.zip. Sa bagong repo: "uploading an existing file" (o Add file > Upload files).
+      I-drag ang LAHAT ng LAMAN ng salamin-site folder, hindi ang folder mismo: index.html, sw.js,
+      manifest.webmanifest, icon-192.png, icon-512.png, .nojekyll, at ang lib at models folders. Commit changes.
+      Lahat ng file ay mas maliit sa 25 MB, ang limit ng upload sa browser. (Ang .nojekyll ay nakatago sa Mac; ok lang kung maiwan.)
+   c. Settings > Pages > Build and deployment > Source: Deploy from a branch > Branch: main, folder: / (root) > Save.
+   d. Pagkalipas ng 1 hanggang 5 minuto, bukas na ito sa https://USERNAME.github.io/salamin/ (USERNAME = GitHub username mo).
+   e. Optional na sariling address, hal. salamin.layagilayaresearchjournal.org: Settings > Pages > Custom domain,
+      tapos sa domain provider, magdagdag ng CNAME record: salamin -> USERNAME.github.io. Pagkatapos, i-check ang Enforce HTTPS.
+   f. Sa phone, buksan ang link, tapos:
+      - Android (Chrome): menu > Install app / Add to Home screen
+      - iPhone (Safari): Share > Add to Home Screen
+      Pagkatapos ng unang bukas, gumagana na ito kahit offline. Sa pangalawang bukas, mas mabilis ang transcript sa laptop
+      dahil nagagamit na nito ang ilang CPU cores.
+   Iba pang host (hal. server ng school): i-upload lang ang parehong mga file sa isang https address.
+
+3) AI feedback (opsyonal) - pumili sa Step 2:
+   - Copy and paste with Claude chat: walang key. Ida-download mo ang blurred images, ia-attach sa Claude chat kasama ang prompt,
+     at ipe-paste pabalik ang sagot. Dalawang magkahiwalay na chat para sa dalawang check.
+   - Sariling Anthropic API key: ilalagay mo sa app, nasa open tab lang, hindi sine-save. Direkta sa Anthropic ang padala.
+     May hiwalay na singil ang API sa Claude subscription. Basahin ang data terms ng Anthropic at ang patakaran ng school.
+   - O i-skip ang AI at mag-reflect lang.
+   - "No images (text only)" sa Step 2: walang larawang lalabas sa device. Transcript at lesson details lang ang babasahin ng Claude.
+     Hindi nito mahuhusgahan ang ginagawa ng learners, ang ayos ng room at ang safety, at nakasulat ito sa report.
+     Ito rin ang gamitin kung tunog lang ang recording, o kung hindi ma-play ng browser ang video (hal. iPhone HEVC).
+
+4) Update: i-upload ang mga file ng bagong zip sa parehong repo (papalitan ang luma), tapos Commit changes.
+   May bagong numero na ang sw.js sa bawat bagong zip, kaya kusang magre-refresh ang app sa phones.
+   Hindi na kailangang i-download ulit ang speech engine at speech model pagkatapos ng update.
+
+5) DepEd Order No. 003, s. 2026 (AI sa basic education):
+   - Kung gagamitin ito ng buong department o school, kailangan muna ng Privacy Impact Assessment (PIA)
+     at ilista ito sa DepEd AI Registry. Isama ito sa project proposal.
+   - Alamin sa school head o Data Protection Officer kung kailangan ng AI Use Declaration (Annex A ng order).
+   - Ang report ng Salamin ay may "AI use" statement para sa disclosure.
+   - Bawal sa order ang facial recognition at emotion recognition. Hindi ito ginagawa ng Salamin,
+     at sinasabihan ang Claude na huwag kilalanin ang sinuman at huwag hulaan ang emosyon.
+   - Self-reflection lang ito. Kapag ginamit sa appraisal ng guro, magiging high-risk na AI use ito.
+
+6) Privacy sa Claude:
+   - Copy and paste mode: gumamit ng incognito chat (ghost icon) para hindi ma-save sa history at hindi magamit sa training.
+   - O i-off ang model improvement sa Claude: Settings > Privacy.
+   - API mode: commercial terms, hindi ginagamit sa training by default.
+
+7) Paggawa ng transcript sa loob ng app:
+   - Gumagana sa downloaded na Salamin.html at sa installed app. Hindi ito gumagana sa loob ng Claude.
+   - Sa device mismo ginagawa ang transcript; hindi ina-upload ang tunog ng video.
+   - Sa hosted app, kasama na sa lib folder ang speech engine, kaya hindi na kailangan ang cdn.jsdelivr.net.
+     Ang downloaded na Salamin.html ay kumukuha pa rin nito sa cdn.jsdelivr.net sa unang beses.
+   - Ang speech model (mga 80 hanggang 300 MB) ay dina-download sa huggingface.co sa unang beses, tapos naka-save na sa browser.
+     Kung naka-block ang huggingface.co sa school, puwedeng ilagay ng IT ang model sa models folder (basahin ang models/README.txt),
+     o gamitin ang mobile data sa unang download.
+   - Mas mabilis sa laptop na may Chrome o Edge. Sa phone, puwedeng umabot nang matagal ang isang buong lesson, kaya:
+     puwedeng bahagi lang ng video ("Only part of the video", hal. 10:00 hanggang 25:00), at kapag pinindot ang Stop,
+     naiiwan ang transcript hanggang sa puntong iyon.
+   - Pagkatapos, may "Review transcript" (optional): pindutin ang oras para marinig ang linya, itama ang mali,
+     at markahan kung Teacher o Learner ang nagsasalita. Puwedeng laktawan.
+   - "Guess speakers from the words": hinuhulaan ng Salamin kung Teacher o Learner batay sa mga salita (hal. "po", "ma'am", "class").
+     May tandang pananong ang hula. I-tap ang check para tanggapin, o ang speaker para palitan. Kung karamihan ay hula pa,
+     "Some evidence" lang ang pinakamataas sa Talk and participation.
+   - Kapag na-review ang transcript na gawa ng Salamin, nakasulat sa report kung ilang porsiyento ng salita ang binago mo.
+     Ito ay magaspang na sukat ng accuracy ng speech recognition para sa klase mo.
+   - Kung hindi na-review ang transcript na gawa ng Salamin, "Some evidence" lang ang pinakamataas sa mga criteria
+     na umaasa rito, at nakasulat ito sa report. Kapag na-review, nawawala ang limit na ito.
+   - Kapag pinalitan ang video, nabubura ang transcript na ginawa ng Salamin para sa naunang video (may Undo).
+     Hindi binubura ang transcript na ikaw mismo ang nag-paste o nag-upload.
+   - Sa ilalim ng "Names to hide", may "Possible names" na kinuha sa transcript. I-tap para idagdag.
+     Tingnan pa rin ang buong transcript: hindi nito nahuhuli ang lahat ng pangalan, lalo na ang mga palayaw.
+
+8) Dalawang mode (pinipili sa Step 1):
+   - Quick feedback (default): walang consent checklist. Para sa sarili mong pagsusuri, kahit ilang beses. Ang report ay may tatak na PERSONAL DRAFT.
+     Hindi pa rin nawawala ang preview ng blurred images bago magpadala sa AI.
+   - Formal report: para sa report na babasahin ng iba. Kailangan ang limang consent items, at nakasulat sa report na na-confirm ang mga ito.
+     Pwede ring i-upgrade ang isang Quick round sa Step 3. Ilalagay ng report kung ang AI draft ay ginawa bago na-confirm ang checklist.
+   Sa parehong mode, self-reflection pa rin ito, hindi opisyal na COT/IPCRF.
+
+9) Kasama ang kapwa guro o mentor (Step 3, optional): panoorin ang video nang magkasama sa device mo, para hindi ito lumabas.
+   Isulat ang napansin nila at ang napagkasunduang susubukan. Coaching notes ito, hindi rating. Nasa sulat sa magulang na rin ito.
+
+10) Pilot study (Step 3, "For a pilot study"): i-save ang pilot table (CSV) kada lesson. Isang row kada criterion,
+   walang pangalan, quote o video. Pupunan ng observer ang huling dalawang column nang hindi muna tinitingnan ang AI results.
+   Gamitin ang hiwalay na agreement sheet para makuha ang agreement at weighted kappa.
+
+11) Paalala: self-reflection lang ito. Hindi ito opisyal na COT/IPCRF at hindi dapat gamitin sa ranking o desisyon tungkol sa guro.
+   Hindi pa napapatunayan ang criteria at ang pagkakatugma ng AI sa trained observers.
