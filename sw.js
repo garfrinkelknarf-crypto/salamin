@@ -1,4 +1,4 @@
-var CACHE='salamin-v13';
+var CACHE='salamin-v14';
 /* The speech-engine files in lib/ are pinned versions, so they keep their own cache across app updates. Change LIB only when they change. */
 var LIB='salamin-lib-3';
 var FILES=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png'];
